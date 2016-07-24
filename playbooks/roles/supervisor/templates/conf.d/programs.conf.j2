@@ -1,0 +1,5 @@
+[program:mailhog]
+command=/usr/local/bin/mailhog
+autostart=true
+autorestart=true
+stderr_logfile = /var/log/supervisord/mailhog-stderr.log

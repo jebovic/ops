@@ -1,0 +1,19 @@
+---
+
+- name: ensure mailhog install directory exists
+  file:
+    path: "{{ mailhog_install_dir }}"
+    state: directory
+
+- name: download MailHog and mhsendmail binaries.
+  get_url:
+    url: "{{ item.url }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+    - url: "{{ mailhog_binary_url }}"
+      dest: "{{ mailhog_install_dir }}/mailhog"
+    - url: "{{ mhsendmail_binary_url }}"
+      dest: "{{ mailhog_install_dir }}/mhsendmail"

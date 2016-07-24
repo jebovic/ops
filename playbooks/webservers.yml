@@ -9,8 +9,9 @@
     - { role: php }
     - { role: composer }
     - { role: memcache }
-    - { role: supervisor }
     - { role: mysql }
+    - { role: mailhog }
+    - { role: supervisor }
 
 - hosts: lempstack
   become: true

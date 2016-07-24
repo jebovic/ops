@@ -1,8 +1,7 @@
 ---
 
 supervisor_config:
-  pid_file: /var/run/supervisord.pid
   http_server:
     port: 9988
-    username: socleweb
-    password: PacMan!123
+    username: supervisor_user
+    password: supervisor

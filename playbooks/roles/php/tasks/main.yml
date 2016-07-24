@@ -20,6 +20,13 @@
   notify:
     - restart php-fpm
 
+- name: config CLI
+  template:
+    src: "{{ item }}"
+    dest: "/etc/php5/cli/{{ item }}"
+  with_items:
+    - php.ini
+
 - name: service start
   service:
     name:  "{{ item }}"
