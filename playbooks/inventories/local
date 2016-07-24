@@ -1,0 +1,12 @@
+lesradislemp.local ansible_ssh_host=192.168.50.100 ansible_ssh_port=22 ansible_user='vagrant' ansible_ssh_private_key_file=~/projects/lesradis/.vagrant/machines/lesradis_lemp/virtualbox/private_key
+lesradislamp.local ansible_ssh_host=192.168.50.101 ansible_ssh_port=22 ansible_user='vagrant' ansible_ssh_private_key_file=~/projects/lesradis/.vagrant/machines/lesradis_lamp/virtualbox/private_key
+
+[lampstack]
+lesradislamp.local
+
+[lempstack]
+lesradislemp.local
+
+[webservers:children]
+lampstack
+lempstack

@@ -1,0 +1,6 @@
+---
+
+nginx_config:
+  user: www-data
+  port: 80
+  process_number: 4

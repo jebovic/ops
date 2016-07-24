@@ -1,0 +1,9 @@
+---
+
+- name: restart supervisord
+  command: "[[ -e {{ supervisor_config.pid_file }} ]] && cat {{ supervisor_config.pid_file }} | xargs kill -9 && rm {{ supervisor_config.pid_file }}"
+  changed_when: true
+  notify: do restart supervisord
+
+- name: do restart supervisord
+  command: "supervisord -c /etc/supervisor/supervisord.conf --pidfile {{ supervisor_config.pid_file }}"

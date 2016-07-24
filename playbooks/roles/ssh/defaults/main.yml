@@ -1,0 +1,5 @@
+---
+
+custom_ssh_config:
+  admin_user: ops
+  admin_user_group: admin

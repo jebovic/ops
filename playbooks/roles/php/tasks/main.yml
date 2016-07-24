@@ -1,0 +1,28 @@
+---
+
+- name: install apt packages
+  apt:
+    name:  "{{ item }}"
+    state: present
+    install_recommends: false
+    update_cache:       true
+    cache_valid_time:   3600
+  with_items: "{{ php_config.php_packages }}"
+
+- name: config
+  template:
+    src: "{{ item }}"
+    dest: "/etc/php5/fpm/{{ item }}"
+  with_items:
+    - php.ini
+    - php-fpm.conf
+    - pool.d/www.conf
+  notify:
+    - restart php-fpm
+
+- name: service start
+  service:
+    name:  "{{ item }}"
+    state: started
+  with_items:
+    - php5-fpm

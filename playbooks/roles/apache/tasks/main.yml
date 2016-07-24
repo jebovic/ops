@@ -1,0 +1,78 @@
+---
+
+- name: install apt packages
+  apt:
+    name:  "{{ item }}"
+    state: present
+    install_recommends: false
+    update_cache:       true
+    cache_valid_time:   3600
+  with_items:
+    - apache2
+    - apache2-utils
+
+- name: config
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/apache2/{{ item }}"
+  with_items:
+    - apache2.conf
+  notify:
+    - restart apache2
+
+
+- name: Enable modules
+  file:
+    src: "/etc/apache2/mods-available/{{ item }}"
+    dest: "/etc/apache2/mods-enabled/{{ item }}"
+    state: link
+  with_items: "{{ apache_config.modules }}"
+  notify:
+    - restart apache2
+
+- name: create macros folder
+  file:
+    path: /etc/apache2/macros
+    state: directory
+
+- name: add macros
+  template: src=macros/{{ item }}.macro.j2 dest=/etc/apache2/macros/{{ item }}.macro
+  with_items:
+    - "{{ apache_config.macros }}"
+  notify:
+    - restart apache2
+
+- name: remove default vhosts
+  file:
+    dest: "/etc/apache2/{{ item }}"
+    state: absent
+  with_items:
+    - sites-available/*
+    - sites-enabled/*
+  notify:
+    - restart apache2
+
+
+- name: add vhosts
+  template: src=vhosts/{{ item }}.conf.j2 dest=/etc/apache2/sites-available/{{ item }}.conf
+  with_items:
+    - "{{ apache_vhosts }}"
+  notify:
+    - restart apache2
+
+- name: enable vhosts
+  file:
+    src: /etc/apache2/sites-available/{{ item }}.conf
+    dest: /etc/apache2/sites-enabled/{{ item }}.conf
+    state: link
+  with_items:
+    - "{{ apache_vhosts }}"
+  notify:
+    - restart apache2
+
+- name: service start
+  service:
+    name:  "{{ item }}"
+    state: started
+  with_items:
+    - apache2

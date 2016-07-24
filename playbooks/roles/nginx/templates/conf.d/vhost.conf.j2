@@ -1,0 +1,15 @@
+server {
+  listen *:{{ nginx_config.port }};
+  server_name _;
+  root /srv/www;
+
+  index app.php app_dev.php index.php index.html;
+
+  location ~ \.php$ {
+    fastcgi_split_path_info ^(.+\.php)(/.+)$;
+    include fastcgi_params;
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    fastcgi_intercept_errors on;
+    fastcgi_pass php-fpm-project;
+  }
+}

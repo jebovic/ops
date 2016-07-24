@@ -1,0 +1,5 @@
+---
+
+composer_config:
+  path: /usr/local/bin/composer
+  version: ''

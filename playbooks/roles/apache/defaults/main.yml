@@ -1,0 +1,25 @@
+---
+
+apache_config:
+  user: www-data
+  port: 80
+  process_number: 4
+  macros:
+    - common-nofpm
+    - common
+    - commonREST
+    - php-fpm
+    - ssl-with-chain
+    - ssl
+  modules:
+    - proxy.load
+    - proxy_fcgi.load
+    - proxy_http.load
+    - proxy_ftp.load
+    - proxy_connect.load
+    - macro.load
+    - rewrite.load
+    - headers.load
+
+apache_vhosts:
+  - default

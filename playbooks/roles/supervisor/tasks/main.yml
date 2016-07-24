@@ -1,0 +1,24 @@
+---
+
+- name: install pip package
+  pip:
+    name:  "{{ item }}"
+  with_items:
+    - supervisor
+
+- name: create directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - /etc/supervisor/conf.d
+
+- name: config
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/supervisor/{{ item }}"
+  with_items:
+    - supervisord.conf
+    - conf.d/programs.conf
+  notify:
+    - restart supervisord

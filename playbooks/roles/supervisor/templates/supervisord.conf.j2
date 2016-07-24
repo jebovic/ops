@@ -1,0 +1,29 @@
+[unix_http_server]
+file=/tmp/supervisor.sock
+
+[inet_http_server]
+port={{ ansible_host }}:{{ supervisor_config.http_server.port }}
+username={{ supervisor_config.http_server.username }}
+password={{ supervisor_config.http_server.password }}
+
+[supervisord]
+logfile=/tmp/supervisord.log
+logfile_maxbytes=50MB
+logfile_backups=10
+loglevel=info
+pidfile=/tmp/supervisord.pid
+nodaemon=false
+minfds=1024
+minprocs=200
+
+[rpcinterface:supervisor]
+supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
+
+[supervisorctl]
+serverurl=unix:///tmp/supervisor.sock
+serverurl=http://{{ ansible_host }}:{{ supervisor_config.http_server.port }}
+username={{ supervisor_config.http_server.username }}
+password={{ supervisor_config.http_server.password }}
+
+[include]
+files = conf.d/*.conf

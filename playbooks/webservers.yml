@@ -1,0 +1,25 @@
+---
+
+- include: base.yml
+
+- hosts: webservers
+  become: true
+  become_method: sudo
+  roles:
+    - { role: php }
+    - { role: composer }
+    - { role: memcache }
+    - { role: supervisor }
+    #- { role: mysql }
+
+- hosts: lempstack
+  become: true
+  become_method: sudo
+  roles:
+    - { role: nginx }
+
+- hosts: lampstack
+  become: true
+  become_method: sudo
+  roles:
+    - { role: apache }

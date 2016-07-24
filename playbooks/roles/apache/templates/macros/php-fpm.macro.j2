@@ -1,0 +1,8 @@
+<Macro phpFpmMacro>
+
+    <FilesMatch \.php$>
+        #SetHandler proxy:fcgi://127.0.0.1:9002
+        SetHandler "proxy:unix:/var/run/php5-fpm.sock|fcgi://localhost/"
+    </FilesMatch>
+
+</Macro>

@@ -1,0 +1,29 @@
+---
+
+- name: install apt packages
+  apt:
+    name:  "{{ item }}"
+    state: latest
+    install_recommends: false
+    update_cache:       true
+    cache_valid_time:   3600
+  with_items:
+    - zsh
+    - git
+
+- name: cloning repo
+  git:
+    repo: https://github.com/robbyrussell/oh-my-zsh
+    dest: /home/{{ ohmyzsh_for }}/.oh-my-zsh
+
+- name: add plugin
+  git: 
+    repo: "{{ item.repo }}" 
+    dest: "/home/{{ ohmyzsh_for }}/.oh-my-zsh/custom/plugins/{{ item.dest }}"
+  with_items:
+    - { repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git", dest: "zsh-syntax-highlighting" }
+
+- name: creating new ~/.zshrc
+  template:
+    src: zshrc.j2
+    dest: /home/{{ ohmyzsh_for }}/.zshrc
