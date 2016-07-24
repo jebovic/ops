@@ -1,0 +1,35 @@
+---
+
+- name: install apt packages
+  apt:
+    name:  "{{ item }}"
+    state: present
+    install_recommends: false
+    update_cache:       true
+    cache_valid_time:   3600
+  with_items:
+    - mysql-server
+    - mysql-client
+    - python-mysqldb
+
+- name: service start
+  service:
+    name:  "{{ item }}"
+    state: started
+  with_items:
+    - mysql
+
+- name: create mysql users
+  mysql_user:
+    name:     "{{ default_user.name }}"
+    password: "{{ default_user.password|default(omit) }}"
+    host:     "{{ default_user.host|default('localhost') }}"
+    priv:     "{{ default_user.priv }}"
+    state:    "{{ default_user.state|default(omit) }}"
+
+- name: create mysql databases
+  mysql_db:
+    name:      "{{ default_database.name }}"
+    encoding:  "{{ default_database.encoding|default('utf8') }}"
+    collation: "{{ default_database.collation|default('utf8_general_ci') }}"
+    state:     "{{ default_database.state|default(omit) }}"

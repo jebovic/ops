@@ -10,7 +10,7 @@
     - { role: composer }
     - { role: memcache }
     - { role: supervisor }
-    #- { role: mysql }
+    - { role: mysql }
 
 - hosts: lempstack
   become: true

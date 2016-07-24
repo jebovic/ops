@@ -1,0 +1,14 @@
+---
+
+default_database:
+  name: default_db
+  encoding: utf8
+  collation: utf8_general_ci
+  state: present
+
+default_user:
+  name: db_user
+  password: db_user
+  host: localhost
+  priv: "{{ default_database.name }}.*:ALL"
+  state: present
