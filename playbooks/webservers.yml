@@ -11,7 +11,7 @@
     - { role: memcache }
     - { role: mysql }
     - { role: mailhog }
-    - { role: supervisor }
+    - { role: supervisor, programs: ['mailhog'] }
 
 - hosts: lempstack
   become: true

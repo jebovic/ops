@@ -1,3 +1,4 @@
 ---
 
 ohmyzsh_for: ops
+go_path: /srv/golang
