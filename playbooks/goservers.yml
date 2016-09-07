@@ -1,0 +1,10 @@
+---
+
+- include: base.yml
+
+- hosts: goservers
+  become: true
+  become_method: sudo
+  roles:
+    - { role: go }
+    - { role: mongodb }
