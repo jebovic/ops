@@ -1,0 +1,11 @@
+---
+
+blackfire_key_url: https://packagecloud.io/gpg.key
+blackfire_package_url: http://packages.blackfire.io/debian
+blackfire_directory: /etc/blackfire
+blackfire_collector: https://blackfire.io
+# Log verbosity level (4: debug, 3: info, 2: warning, 1: error)
+blackfire_log_level: 1
+blackfire_socket: "unix:///var/run/blackfire/agent.sock"
+blackfire_server_id: "REPLACE_IT_WITH_YOUR_KEY"
+blackfire_server_token: "REPLACE_IT_WITH_YOUR_KEY"
