@@ -1,0 +1,9 @@
+---
+
+#blackfire.io keys
+blackfire_server_id: "{{ vault_blackfire_server_id }}"
+blackfire_server_token: "{{ vault_blackfire_server_token }}"
+
+#newrelic keys
+newrelic_sysmond_key: "{{ vault_newrelic_sysmond_key }}"
+newrelic_key: "{{ vault_newrelic_key }}"
