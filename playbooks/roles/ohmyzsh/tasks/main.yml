@@ -6,7 +6,6 @@
     state: latest
     install_recommends: false
     update_cache:       true
-    cache_valid_time:   3600
   with_items:
     - zsh
     - git
@@ -18,7 +17,7 @@
 
 - name: add plugin
   git: 
-    repo: "{{ item.repo }}" 
+    repo: "{{ item.repo }}"
     dest: "/home/{{ ohmyzsh_for }}/.oh-my-zsh/custom/plugins/{{ item.dest }}"
   with_items:
     - { repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git", dest: "zsh-syntax-highlighting" }

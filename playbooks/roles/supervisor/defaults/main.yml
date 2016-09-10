@@ -1,7 +1,9 @@
 ---
 
-supervisor_config:
-  http_server:
-    port: 9988
-    username: supervisor_user
-    password: supervisor
+supervisor_socket: /tmp/supervisor.sock
+supervisor_pidfile: /var/run/supervisord.pid
+supervisor_log_path: /var/log/supervisord
+supervisor_log_file: "{{ supervisor_log_path }}/supervisord.log"
+supervisor_http_port: 9988
+supervisor_http_username: supervisor_user
+supervisor_http_password: supervisor

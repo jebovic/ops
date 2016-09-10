@@ -1,17 +1,17 @@
 [unix_http_server]
-file=/tmp/supervisor.sock
+file={{ supervisor_socket }}
 
 [inet_http_server]
-port={{ ansible_host }}:{{ supervisor_config.http_server.port }}
-username={{ supervisor_config.http_server.username }}
-password={{ supervisor_config.http_server.password }}
+port={{ ansible_host }}:{{ supervisor_http_port }}
+username={{ supervisor_http_username }}
+password={{ supervisor_http_password }}
 
 [supervisord]
-logfile=/tmp/supervisord.log
+logfile={{ supervisor_log_file }}
 logfile_maxbytes=50MB
 logfile_backups=10
 loglevel=info
-pidfile=/tmp/supervisord.pid
+pidfile={{ supervisor_pidfile }}
 nodaemon=false
 minfds=1024
 minprocs=200
@@ -20,10 +20,9 @@ minprocs=200
 supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
 
 [supervisorctl]
-serverurl=unix:///tmp/supervisor.sock
-serverurl=http://{{ ansible_host }}:{{ supervisor_config.http_server.port }}
-username={{ supervisor_config.http_server.username }}
-password={{ supervisor_config.http_server.password }}
+serverurl=unix://{{ supervisor_socket }}
+username={{ supervisor_http_username }}
+password={{ supervisor_http_password }}
 
 [include]
 files = conf.d/*.conf

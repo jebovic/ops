@@ -4,7 +4,7 @@
   command: "{{ pip }} --version"
   ignore_errors: true
   changed_when: false
-  always_run: true
+  check_mode: no
   register: pip_is_installed
 
 - name: download
@@ -23,7 +23,7 @@
   shell: "{{ pip }} --version | awk '{print $2}'"
   register: pip_installed_version
   changed_when: false
-  always_run: true
+  check_mode: no
   when: pip_version != None or pip_version != "LATEST"
 
 - name: reinstall
