@@ -7,3 +7,4 @@
     - { role: ssh }
     - { role: init }
     - { role: ohmyzsh }
+    - { role: newrelic }
