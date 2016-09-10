@@ -6,12 +6,11 @@
     state: present
     install_recommends: false
     update_cache:       true
-    cache_valid_time:   3600
   with_items: "{{ php_config.php_packages }}"
 
 - name: config
   template:
-    src: "{{ item }}"
+    src: "{{ item }}.j2"
     dest: "/etc/php5/fpm/{{ item }}"
   with_items:
     - php.ini
@@ -22,10 +21,24 @@
 
 - name: config CLI
   template:
-    src: "{{ item }}"
+    src: "{{ item }}.j2"
     dest: "/etc/php5/cli/{{ item }}"
   with_items:
     - php.ini
+
+- name: newrelic config
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/php5/mods-available/{{ item }}"
+  with_items:
+    - newrelic.ini
+  notify:
+    - restart php-fpm
+
+- name: enable newrelic module
+  shell: /usr/sbin/php5enmod newrelic
+  notify:
+    - restart php-fpm
 
 - name: service start
   service:

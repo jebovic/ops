@@ -16,6 +16,7 @@ php_config:
     - php5-xsl
     - php5-mongo
     - php-apc
+    - newrelic-php5
   pool:
     user: "www-data"
     group: "www-data"
