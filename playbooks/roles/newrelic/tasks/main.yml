@@ -1,0 +1,33 @@
+---
+
+- name: install GPG key
+  apt_key:
+    url: "{{ newrelic_apt_key_url }}"
+    state: present
+  register: gpg_key_installed
+
+- name: add repo
+  apt_repository:
+    repo: "deb {{ newrelic_apt_url }} newrelic non-free"
+    state: present
+    update_cache: yes
+  when: gpg_key_installed|success
+  register: newrelic_repo_installed
+
+- name: install apt packages
+  apt:
+    name: "{{ item }}"
+    state: present
+    install_recommends: false
+    update_cache:       true
+  with_items: "{{ newrelic_packages }}"
+  when: newrelic_repo_installed|success
+  register: newrelic_installed
+
+- name: config
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ newrelic_config_path }}/{{ item }}"
+  with_items:
+    - nrsysmond.cfg
+  notify: restart nrsysmond
