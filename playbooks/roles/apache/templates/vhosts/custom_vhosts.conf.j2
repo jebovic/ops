@@ -1,0 +1,7 @@
+{% if apache_custom_vhosts %}
+{% for vhost in apache_custom_vhosts %}
+<VirtualHost *:{{ apache_port }}>
+    Use CommonMacro {{ vhost.ServerName }} {{ vhost.DocumentRoot }}
+</VirtualHost>
+{% endfor %}
+{% endif %}

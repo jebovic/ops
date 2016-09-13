@@ -1,5 +1,3 @@
-<VirtualHost *:{{ apache_config.port }}>
-
-    Use CommonMacro {{ ansible_host }} /srv/www
-
+<VirtualHost *:{{ apache_port }}>
+    Use CommonMacro {{ ansible_host }} {{ apache_www_root }}
 </VirtualHost>

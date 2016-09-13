@@ -7,11 +7,9 @@
         Options -Indexes +FollowSymLinks +MultiViews
         AllowOverride All
         Require all granted
-
         <Limit GET POST PUT DELETE OPTIONS>
  	        Require all granted
  	    </Limit>
-
     </Directory>
 
     Use phpFpmMacro
@@ -25,6 +23,6 @@
     # Fix Authorization header unset by php-fpm
     SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
     # Fix apache proxy to php-fpm Transfer-Encoding: chunked
-    Header unset Content-Length
+    # Header unset Content-Length
 
 </Macro>

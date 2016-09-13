@@ -1,17 +1,12 @@
 Mutex file:${APACHE_LOCK_DIR} default
-
 PidFile ${APACHE_PID_FILE}
-
 Timeout 300
-
 KeepAlive On
-
 MaxKeepAliveRequests 100
-
 KeepAliveTimeout 5
 
-User ${APACHE_RUN_USER}
-Group ${APACHE_RUN_GROUP}
+User {{ apache_user }}
+Group {{ apache_user_group }}
 
 HostnameLookups Off
 
@@ -36,7 +31,7 @@ Include ports.conf
 </Directory>
 
 <Directory /var/www/>
-        Options Indexes FollowSymLinks
+        Options -Indexes +FollowSymLinks
         AllowOverride None
         Require all granted
 </Directory>
@@ -54,7 +49,5 @@ LogFormat "%{Referer}i -> %U" referer
 LogFormat "%{User-agent}i" agent
 
 IncludeOptional macros/*.macro
-
 IncludeOptional conf-enabled/*.conf
-
 IncludeOptional sites-enabled/*.conf

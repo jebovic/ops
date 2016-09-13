@@ -14,34 +14,41 @@
   template:
     src: "{{ item }}.j2"
     dest: "/etc/apache2/{{ item }}"
+    owner: root
+    group: root
   with_items:
     - apache2.conf
   notify:
-    - restart apache2
+    - restart apache
 
-
-- name: Enable modules
+- name: enable modules
   file:
     src: "/etc/apache2/mods-available/{{ item }}"
     dest: "/etc/apache2/mods-enabled/{{ item }}"
     state: link
-  with_items: "{{ apache_config.modules }}"
+  with_items: "{{ apache_modules }}"
   notify:
-    - restart apache2
+    - restart apache
 
 - name: create macros folder
   file:
     path: /etc/apache2/macros
     state: directory
+    owner: root
+    group: root
 
 - name: add macros
-  template: src=macros/{{ item }}.macro.j2 dest=/etc/apache2/macros/{{ item }}.macro
+  template:
+    src: "macros/{{ item }}.macro.j2"
+    dest: "/etc/apache2/macros/{{ item }}.macro"
+    owner: root
+    group: root
   with_items:
-    - "{{ apache_config.macros }}"
+    - "{{ apache_macros }}"
   notify:
-    - restart apache2
+    - restart apache
 
-- name: remove default vhosts
+- name: remove default configuration
   file:
     dest: "/etc/apache2/{{ item }}"
     state: absent
@@ -49,25 +56,28 @@
     - sites-available/*
     - sites-enabled/*
   notify:
-    - restart apache2
-
+    - restart apache
 
 - name: add vhosts
-  template: src=vhosts/{{ item }}.conf.j2 dest=/etc/apache2/sites-available/{{ item }}.conf
+  template:
+    src: "vhosts/{{ item }}.conf.j2"
+    dest: "/etc/apache2/sites-available/{{ item }}.conf"
+    owner: root
+    group: root
   with_items:
     - "{{ apache_vhosts }}"
   notify:
-    - restart apache2
+    - restart apache
 
 - name: enable vhosts
   file:
-    src: /etc/apache2/sites-available/{{ item }}.conf
-    dest: /etc/apache2/sites-enabled/{{ item }}.conf
+    src: "/etc/apache2/sites-available/{{ item }}.conf"
+    dest: "/etc/apache2/sites-enabled/{{ item }}.conf"
     state: link
   with_items:
     - "{{ apache_vhosts }}"
   notify:
-    - restart apache2
+    - restart apache
 
 - name: service start
   service:
