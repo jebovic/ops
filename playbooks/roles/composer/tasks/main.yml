@@ -5,27 +5,27 @@
     php_executable: php
   when: php_executable is not defined
 
-- name: check if Composer is installed
-  stat: "path={{ composer_config.path }}"
+- name: check current install
+  stat: "path={{ composer_path }}"
   register: composer_bin
 
-- name: download Composer installer
+- name: download installer
   get_url:
-    url: https://getcomposer.org/installer
+    url: "{{ composer_download_url }}"
     dest: /tmp/composer-installer.php
     mode: 0755
   when: not composer_bin.stat.exists
 
-- name: run Composer installer
+- name: run installer
   command: >
-    {{ php_executable }} composer-installer.php {% if composer_config.version != '' %} --version={{ composer_config.version }}{% endif %}
+    {{ php_executable }} composer-installer.php {% if composer_version != '' %} --version={{ composer_version }}{% endif %}
     chdir=/tmp
   when: not composer_bin.stat.exists
 
-- name: move Composer into globally-accessible location
+- name: move into globally-accessible location
   shell: >
-    mv /tmp/composer.phar {{ composer_config.path }}
-    creates={{ composer_config.path }}
+    mv /tmp/composer.phar {{ composer_path }}
+    creates={{ composer_path }}
   when: not composer_bin.stat.exists
 
 - name: add global composer config
