@@ -1,7 +1,9 @@
 ---
 
+# Include Base playbook for common tasks
 - include: base.yml
 
+# Specific playbook for go servers, including MongoDB for projects needs
 - hosts: goservers
   become: true
   become_method: sudo

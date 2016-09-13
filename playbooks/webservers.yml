@@ -1,7 +1,9 @@
 ---
 
+# Include Base playbook for common tasks
 - include: base.yml
 
+# Specific playbook for every webservers, including different projects needs
 - hosts: webservers
   become: true
   become_method: sudo
@@ -14,12 +16,14 @@
     - { role: mailhog }
     - { role: supervisor, programs: ['mailhog'] }
 
+# Specific lemp environment for webservers (Nginx)
 - hosts: lempstack
   become: true
   become_method: sudo
   roles:
     - { role: nginx }
 
+# Specific lamp environment for webservers (Apache)
 - hosts: lampstack
   become: true
   become_method: sudo

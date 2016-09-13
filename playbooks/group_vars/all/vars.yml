@@ -1,5 +1,6 @@
 ---
 
+# vault_* vars are located in vault.yml encrypted file
 #blackfire.io keys
 blackfire_server_id: "{{ vault_blackfire_server_id }}"
 blackfire_server_token: "{{ vault_blackfire_server_token }}"
