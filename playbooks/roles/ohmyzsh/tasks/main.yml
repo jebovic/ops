@@ -3,9 +3,10 @@
 - name: install apt packages
   apt:
     name:  "{{ item }}"
-    state: latest
+    state: present
     install_recommends: false
-    update_cache:       true
+    update_cache:       yes
+    cache_valid_time:   300
   with_items:
     - zsh
     - git

@@ -14,8 +14,10 @@
 - name: install apt packages
   apt:
     name: "{{ item }}"
-    update_cache: yes
     state: present
+    install_recommends: false
+    update_cache:       yes
+    cache_valid_time:   300
   with_items:
     - blackfire-agent
     - blackfire-php

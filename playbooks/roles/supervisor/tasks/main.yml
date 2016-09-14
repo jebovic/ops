@@ -3,8 +3,10 @@
 - name: install apt package
   apt:
     name:  "{{ item }}"
+    state: present
     install_recommends: false
-    update_cache:       true
+    update_cache:       yes
+    cache_valid_time:   300
   with_items:
     - supervisor
 
