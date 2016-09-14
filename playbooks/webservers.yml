@@ -8,6 +8,7 @@
   become: true
   become_method: sudo
   roles:
+    - { role: haproxy }
     - { role: php }
     - { role: blackfire }
     - { role: composer }
