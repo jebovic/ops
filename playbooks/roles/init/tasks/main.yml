@@ -1,5 +1,7 @@
 ---
 
+- include: pip.yml
+
 - name: install apt packages
   apt:
     name:  "{{ item }}"
@@ -7,11 +9,9 @@
     install_recommends: false
     update_cache:       yes
     cache_valid_time:   300
-  with_items:
-    - curl
-    - wget
-    - htop
+  with_items: "{{ init_apt_packages }}"
 
 - name: install pip packages
   pip:
-    name: httpie
+    name: "{{ item }}"
+  with_items: "{{ init_pip_packages }}"
