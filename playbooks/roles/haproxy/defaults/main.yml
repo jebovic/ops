@@ -1,3 +1,4 @@
 ---
 
 haproxy_config_file: /etc/haproxy/haproxy.cfg
+haproxy_enable_ui: true

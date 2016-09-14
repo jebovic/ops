@@ -1,12 +1,12 @@
 ---
 
-- name: haproxy restart
+- name: restart haproxy
   command: "haproxy -c -f {{ haproxy_config_file }}"
   changed_when: true
   notify:
-    - do haproxy restart
+    - do restart haproxy
 
-- name: do haproxy restart
+- name: do restart haproxy
   service:
     name:  haproxy
     state: restarted

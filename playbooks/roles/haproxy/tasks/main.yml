@@ -15,9 +15,9 @@
     src:  haproxy.cfg.j2
     dest: "{{ haproxy_config_file }}"
   notify:
-    - haproxy restart
+    - restart haproxy
 
-- name: services start
+- name: service start
   service:
     name:  "{{ item }}"
     state: started
