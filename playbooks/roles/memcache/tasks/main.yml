@@ -10,6 +10,17 @@
   with_items:
     - memcached
 
+- name: config
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/{{ item }}"
+    owner: root
+    group: root
+  with_items:
+    - memcached.conf
+  notify:
+    - restart memcached
+
 - name: service start
   service:
     name:  "{{ item }}"

@@ -1,0 +1,9 @@
+---
+
+# Memcached basic configuration
+memcache_log_file: /var/log/memcached.log
+memcache_memory_size: 64
+memcache_port: 11211
+memcache_user: memcache
+memcache_listen_address: 127.0.0.1
+memcache_max_connections: 1024
