@@ -11,6 +11,17 @@
     - mongodb
     - python-pymongo
 
+- name: config
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/{{ item }}"
+    owner: root
+    group: root
+  with_items:
+    - mongodb.conf
+  notify:
+    - restart mongodb
+
 - name: service start
   service:
     name:  "{{ item }}"
