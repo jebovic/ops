@@ -49,7 +49,7 @@ listen stats 0.0.0.0:9000
     stats realm HAProxy\ Statistics
 
     #The user/pass you want to use. Change this password!
-    stats auth admin:admin
+    stats auth {{ haproxy_ui_user }}:{{ haproxy_ui_password }}
 
     #This allows you to take down and bring up back end servers.
     #This will produce an error on older versions of HAProxy.
