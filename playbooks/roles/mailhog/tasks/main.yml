@@ -1,11 +1,11 @@
 ---
 
-- name: ensure mailhog install directory exists
+- name: check install directory
   file:
     path: "{{ mailhog_install_dir }}"
     state: directory
 
-- name: download MailHog and mhsendmail binaries.
+- name: download MailHog and mhsendmail binaries
   get_url:
     url: "{{ item.url }}"
     dest: "{{ item.dest }}"
