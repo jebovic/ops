@@ -1,23 +1,26 @@
 ---
 
-php_config:
-  php_packages:
-    - php5-fpm
-    - php5-cli
-    - php5-common
-    - php5-imagick
-    - php5-intl
-    - php5-memcached
-    - php5-mysql
-    - php5-redis
-    - php5-curl
-    - php5-json
-    - php5-gd
-    - php5-xsl
-    - php5-mongo
-    - php-apc
-    - newrelic-php5
-  pool:
+# Choose packages to install
+php_packages:
+  - php5-fpm
+  - php5-cli
+  - php5-common
+  - php5-imagick
+  - php5-intl
+  - php5-memcached
+  - php5-mysql
+  - php5-redis
+  - php5-curl
+  - php5-json
+  - php5-gd
+  - php5-xsl
+  - php5-mongo
+  - php-apc
+  - newrelic-php5
+
+# Define your own pools
+php_pools:
+  - name: www
     user: "www-data"
     group: "www-data"
     listen: "/var/run/php5-fpm.sock"
@@ -29,5 +32,61 @@ php_config:
     pm.start_servers: "2"
     pm.min_spare_servers: "1"
     pm.max_spare_servers: "3"
-    pm.process_idle_timeout: "30s;"
+    pm.process_idle_timeout: "30s"
     pm.max_requests: "500"
+
+# Php FPM basic configuration
+php_fpm_pid: /run/php5-fpm.pid
+php_fpm_error_log: /var/log/php5-fpm.log
+php_fpm_syslog_facility: daemon
+php_fpm_syslog_ident: php-fpm
+php_fpm_log_level: notice
+php_fpm_emergency_restart_threshold: 0
+php_fpm_emergency_restart_interval: 0
+php_fpm_process_control_timeout: 0
+php_fpm_process_max: 128
+php_fpm_process_priority: -19
+php_fpm_daemonize: yes
+php_fpm_rlimit_files: 1024
+php_fpm_rlimit_core: 0
+php_fpm_events_mechanism: epoll
+php_fpm_systemd_interval: 10
+php_fpm_pools_include: /etc/php5/fpm/pool.d/*.conf
+
+# Newrelic module configuration
+newrelic_enabled: true
+newrelic_license: REPLACE_WITH_REAL_KEY"
+newrelic_logfile: "/var/log/newrelic/php_agent.log"
+newrelic_loglevel: "info"
+newrelic_appname: "{{ ansible_hostname|default('VM Test') }}"
+newrelic_daemon_logfile: "/var/log/newrelic/newrelic-daemo_.log"
+newrelic_daemon_loglevel: "info"
+newrelic_daemon_port: "/tmp/.newrelic_sock"
+newrelic_daemon_max_threads: 8
+newrelic_daemon_ssl: true
+newrelic_daemon_proxy: ""
+newrelic_daemon_pidfile: ""
+newrelic_daemon_location: "/usr/bin/newrelic-daemon"
+newrelic_daemon_collector_host: "collector.newrelic_com"
+newrelic_daemon_dont_launch: 0
+newrelic_capture_params: false
+newrelic_ignored_params: ""
+newrelic_error_collector_enabled: true
+newrelic_error_collector_record_database_errors: false
+newrelic_error_collector_prioritize_api_errors: false
+newrelic_browser_monitoring_auto_instrument: true
+newrelic_transaction_tracer_enabled: true
+newrelic_transaction_tracer_threshold: "apdex_f"
+newrelic_transaction_tracer_detail: 1
+newrelic_transaction_tracer_slow_sql: true
+newrelic_transaction_tracer_stack_trace_threshold: 500
+newrelic_transaction_tracer_explain_enabled: true
+newrelic_transaction_tracer_explain_threshold: 500
+newrelic_transaction_tracer_record_sql: "obfuscated"
+newrelic_transaction_tracer_custom: ""
+newrelic_framework: ""
+newrelic_webtransaction_name_remove_trailing_path: false
+newrelic_webtransaction_name_functions: ""
+newrelic_webtransaction_name_files: ""
+newrelic_daemon_auditlog: "/var/log/newrelic/audit.log"
+newrelic_analytics_events_enabled: true

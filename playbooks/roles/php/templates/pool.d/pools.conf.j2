@@ -1,0 +1,6 @@
+{% for pool in php_pools %}
+[{{ pool.name }}]
+{% for i in pool if i != 'name' %}
+{{ i }} = {{ pool[i] }}
+{% endfor %}
+{% endfor %}

@@ -7,7 +7,7 @@
     install_recommends: false
     update_cache:       yes
     cache_valid_time:   300
-  with_items: "{{ php_config.php_packages }}"
+  with_items: "{{ php_packages }}"
 
 - name: config
   template:
@@ -16,7 +16,7 @@
   with_items:
     - php.ini
     - php-fpm.conf
-    - pool.d/www.conf
+    - pool.d/pools.conf
   notify:
     - restart php-fpm
 
