@@ -1,6 +1,6 @@
 ---
 
-- name: install GPG key
+- name: install key
   apt_key:
     url: "{{ newrelic_apt_key_url }}"
     state: present
@@ -31,4 +31,11 @@
     dest: "{{ newrelic_config_path }}/{{ item }}"
   with_items:
     - nrsysmond.cfg
-  notify: restart nrsysmond
+  notify: restart newrelic-agent
+
+- name: service start
+  service:
+    name:  "{{ item }}"
+    state: started
+  with_items:
+    - newrelic-sysmond

@@ -1,11 +1,6 @@
 #
 # New Relic Server Monitor configuration file.
 #
-# Lines that begin with a # are comment lines and are ignored by the server
-# monitor. For those options that have command line equivalents, if the
-# option is specified on the command line it will over-ride any value set
-# in this file.
-#
 
 #
 # Option : license_key
@@ -28,7 +23,7 @@ license_key={{ newrelic_sysmond_key|default('REPLACE_WITH_REAL_KEY') }}
 # Default: error
 # Note   : Can also be set with the -d command line option.
 #
-loglevel=info
+loglevel={{ newrelic_log_level }}
 
 #
 # Option : logfile
@@ -38,7 +33,7 @@ loglevel=info
 # Default: none. However it is highly recommended you set a value for this.
 # Note   : Can also be set with the -l command line option.
 #
-logfile=/var/log/newrelic/nrsysmond.log
+logfile={{ newrelic_log_file }}
 
 #
 # Option : proxy
@@ -51,7 +46,7 @@ logfile=/var/log/newrelic/nrsysmond.log
 #            fred:secret@proxy.mydomain.com:8181
 # Default: none (use a direct connection)
 #
-#proxy=
+proxy={{ newrelic_proxy }}
 
 #
 # Option : ssl
@@ -61,7 +56,7 @@ logfile=/var/log/newrelic/nrsysmond.log
 #          the SSL certificates settings below.
 # Default: false
 #
-#ssl=false
+ssl={{ newrelic_ssl }}
 
 #
 # Option : ssl_ca_bundle
@@ -74,7 +69,7 @@ logfile=/var/log/newrelic/nrsysmond.log
 #          /etc/pki/tls/certs/ca-bundle.crt
 # Note   : Can also be set with the -b command line option.
 #
-#ssl_ca_bundle=/path/to/your/bundle.crt
+ssl_ca_bundle={{ newrelic_ssl_ca_bundle }}
 
 #
 # Option : ssl_ca_path
@@ -84,7 +79,7 @@ logfile=/var/log/newrelic/nrsysmond.log
 # Default: /etc/ssl/certs
 # Note   : Can also be set with the -S command line option.
 #
-#ssl_ca_path=/etc/ssl/certs
+ssl_ca_path={{ newrelic_ssl_ca_path }}
 
 #
 # Option : pidfile
@@ -95,7 +90,7 @@ logfile=/var/log/newrelic/nrsysmond.log
 # Default: /tmp/nrsysmond.pid
 # Note   : Can also be set with the -p command line option.
 #
-#pidfile=/var/run/newrelic/nrsysmond.pid
+pidfile={{ newrelic_pid_file }}
 
 #
 # Option : collector_host
@@ -106,7 +101,7 @@ logfile=/var/log/newrelic/nrsysmond.log
 #          if SSL is enabled. If the port is omitted the default value is used.
 # Default: collector.newrelic.com
 #
-#collector_host=collector.newrelic.com
+collector_host={{ newrelic_collector_host }}
 
 #
 # Option : timeout
@@ -120,4 +115,4 @@ logfile=/var/log/newrelic/nrsysmond.log
 #          once the original connection has been made. The value is in seconds.
 # Default: 30
 #
-#timeout=30
+timeout={{ newrelic_timeout }}
