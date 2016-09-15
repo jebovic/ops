@@ -23,7 +23,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "golang" do |prj|
     prj.vm.hostname = "golang.local"
     prj.vm.network "private_network", ip: "192.168.1.10"
-    prj.vm.synced_folder "/home/jebovic/projects/gosample", "/srv/golang", type: "nfs", nfs_udp: true
+    prj.vm.synced_folder "/home/jebovic/projects/gosample", "/srv/golang", id: "v-root", mount_options: ["rw", "tcp", "nolock", "noacl", "async"], type: "nfs", nfs_udp: false
   end
 
   config.vm.define "ci" do |prj|
@@ -34,13 +34,13 @@ Vagrant.configure("2") do |config|
   config.vm.define "weblemp" do |prj|
     prj.vm.hostname = "weblemp.local"
     prj.vm.network "private_network", ip: "192.168.1.30"
-    prj.vm.synced_folder "/home/jebovic/projects", "/srv/www", type: "nfs", nfs_udp: true
+    prj.vm.synced_folder "/home/jebovic/projects", "/srv/www", id: "v-root", mount_options: ["rw", "tcp", "nolock", "noacl", "async"], type: "nfs", nfs_udp: false
   end
 
   config.vm.define "weblamp" do |prj|
     prj.vm.hostname = "weblamp.local"
     prj.vm.network "private_network", ip: "192.168.1.31"
-    prj.vm.synced_folder "/home/jebovic/projects", "/srv/www", type: "nfs", nfs_udp: true
+    prj.vm.synced_folder "/home/jebovic/projects", "/srv/www", id: "v-root", mount_options: ["rw", "tcp", "nolock", "noacl", "async"], type: "nfs", nfs_udp: false
   end
 
   # Full example, with private network, port forwarding, nfs...
