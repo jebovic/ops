@@ -1,30 +1,30 @@
 ---
 
-- name: "add ssh {{ custom_ssh_config.admin_user_group }} group"
+- name: "add ssh {{ admin_user_group }} group"
   group:
-    name: "{{ custom_ssh_config.admin_user_group }}"
+    name: "{{ admin_user_group }}"
     state: present
 
-- name: "add ssh {{ custom_ssh_config.admin_user }} user"
+- name: "add ssh {{ admin_user }} user"
   user:
-    name: "{{ custom_ssh_config.admin_user }}"
+    name: "{{ admin_user }}"
     generate_ssh_key: yes
     ssh_key_bits: 2048
     ssh_key_file: .ssh/id_rsa
     comment: "Cluster admin"
     state: present
-    group: "{{ custom_ssh_config.admin_user_group }}"
+    group: "{{ admin_user_group }}"
     shell: /bin/zsh
 
 - name: add public key to authorized keys
   authorized_key:
-    user: "{{ custom_ssh_config.admin_user }}"
+    user: "{{ admin_user }}"
     key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
     exclusive: yes
 
-- name: "allow '{{ custom_ssh_config.admin_user_group }}' group to have passwordless sudo"
+- name: "allow '{{ admin_user_group }}' group to have passwordless sudo"
   lineinfile:
     dest: /etc/sudoers
     state: present
-    regexp: '^%{{ custom_ssh_config.admin_user_group }}'
-    line: '%{{ custom_ssh_config.admin_user_group }} ALL=(ALL) NOPASSWD: ALL'
+    regexp: '^%{{ admin_user_group }}'
+    line: '%{{ admin_user_group }} ALL=(ALL) NOPASSWD: ALL'
