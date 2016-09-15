@@ -18,7 +18,7 @@
     dest: "/etc/nginx/{{ item }}"
   with_items:
     - nginx.conf
-    - conf.d/vhost.conf
+    - conf.d/custom_vhost.conf
     - conf.d/php-fpm.conf
   notify:
     - restart nginx
