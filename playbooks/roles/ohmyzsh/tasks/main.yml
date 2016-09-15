@@ -17,7 +17,7 @@
     dest: /home/{{ ohmyzsh_for }}/.oh-my-zsh
 
 - name: add plugin
-  git: 
+  git:
     repo: "{{ item.repo }}"
     dest: "/home/{{ ohmyzsh_for }}/.oh-my-zsh/custom/plugins/{{ item.dest }}"
   with_items:
