@@ -46,7 +46,9 @@ logfile={{ newrelic_log_file }}
 #            fred:secret@proxy.mydomain.com:8181
 # Default: none (use a direct connection)
 #
+{% if newrelic_proxy %}
 proxy={{ newrelic_proxy }}
+{% endif %}
 
 #
 # Option : ssl
