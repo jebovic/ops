@@ -4,3 +4,4 @@
 mailhog_install_dir: /usr/local/bin
 mailhog_binary_url: https://github.com/mailhog/MailHog/releases/download/v0.2.0/MailHog_linux_amd64
 mhsendmail_binary_url: https://github.com/mailhog/mhsendmail/releases/download/v0.2.0/mhsendmail_linux_amd64
+sendmail_bin_path: /usr/bin/sendmail

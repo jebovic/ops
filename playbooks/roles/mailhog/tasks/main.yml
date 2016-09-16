@@ -17,3 +17,9 @@
       dest: "{{ mailhog_install_dir }}/mailhog"
     - url: "{{ mhsendmail_binary_url }}"
       dest: "{{ mailhog_install_dir }}/mhsendmail"
+
+- name: replace sendmail by mhsendmail link
+  file:
+    src: "{{ mailhog_install_dir }}/mhsendmail"
+    dest: "{{ sendmail_bin_path }}"
+    state: link

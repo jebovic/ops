@@ -17,6 +17,8 @@ init_apt_packages:
   - fail2ban
   - logrotate
   - unzip
+  - sendmail-bin
+  - sendmail
 
 # Default pip packages to install
 init_pip_packages:
