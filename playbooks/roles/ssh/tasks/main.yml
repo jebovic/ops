@@ -1,5 +1,25 @@
 ---
 
+- name: install apt packages
+  apt:
+    name:  "{{ item }}"
+    state: latest
+    install_recommends: false
+    update_cache:       yes
+    cache_valid_time:   300
+  with_items:
+    - openssh-server
+    - openssh-client
+
+- name: global config
+  template:
+    src: sshd_config.j2
+    dest: "{{ sshd_config_file }}"
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart ssh
+
 - name: "add ssh {{ admin_user_group }} group"
   group:
     name: "{{ admin_user_group }}"
