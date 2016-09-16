@@ -3,3 +3,4 @@
 # This role need newrelic agent
 dependencies:
   - { role: newrelic }
+  - { role: mailhog }

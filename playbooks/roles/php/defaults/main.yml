@@ -54,20 +54,20 @@ php_fpm_systemd_interval: 10
 php_fpm_pools_include: /etc/php5/fpm/pool.d/*.conf
 
 # Newrelic module configuration
-newrelic_enabled: true
-newrelic_license: REPLACE_WITH_REAL_KEY"
+newrelic_enabled: "true"
+newrelic_license: "REPLACE_WITH_REAL_KEY"
 newrelic_logfile: "/var/log/newrelic/php_agent.log"
 newrelic_loglevel: "info"
 newrelic_appname: "{{ ansible_hostname|default('VM Test') }}"
-newrelic_daemon_logfile: "/var/log/newrelic/newrelic-daemo_.log"
+newrelic_daemon_logfile: "/var/log/newrelic/newrelic-daemon.log"
 newrelic_daemon_loglevel: "info"
-newrelic_daemon_port: "/tmp/.newrelic_sock"
+newrelic_daemon_port: "/tmp/.newrelic.sock"
 newrelic_daemon_max_threads: 8
-newrelic_daemon_ssl: true
-newrelic_daemon_proxy: ""
+newrelic_daemon_ssl: "true"
+newrelic_daemon_proxy: false
 newrelic_daemon_pidfile: ""
 newrelic_daemon_location: "/usr/bin/newrelic-daemon"
-newrelic_daemon_collector_host: "collector.newrelic_com"
+newrelic_daemon_collector_host: "collector.newrelic.com"
 newrelic_daemon_dont_launch: 0
 newrelic_capture_params: false
 newrelic_ignored_params: ""
