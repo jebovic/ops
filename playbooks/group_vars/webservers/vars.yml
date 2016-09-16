@@ -1,0 +1,8 @@
+---
+
+supervisor_programs:
+  - name: mailhog
+    command: /usr/local/bin/mailhog -api-bind-addr :8025 -ui-bind-addr :8025
+    autostart: "true"
+    autorestart: "true"
+    stderr_logfile: "{{ supervisor_log_path }}/mailhog-stderr.log"
