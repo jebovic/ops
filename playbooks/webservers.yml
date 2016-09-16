@@ -16,7 +16,7 @@
     - { role: mysql }
     - { role: mongodb }
     - { role: mailhog }
-    - { role: supervisor, programs: ['mailhog'] }
+    - { role: supervisor }
 
 # Specific lemp environment for webservers (Nginx)
 - hosts: lempstack

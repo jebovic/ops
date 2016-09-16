@@ -1,0 +1,6 @@
+{% for program in supervisor_programs %}
+[program:{{ program.name }}]
+{% for i in program if i != 'name' %}
+{{ i }}={{ program[i] }}
+{% endfor %}
+{% endfor %}

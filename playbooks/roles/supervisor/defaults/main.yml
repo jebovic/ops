@@ -7,3 +7,6 @@ supervisor_log_file: "{{ supervisor_log_path }}/supervisord.log"
 supervisor_http_port: 9988
 supervisor_http_username: supervisor_user
 supervisor_http_password: supervisor
+
+# Supervisor programs
+supervisor_programs: []

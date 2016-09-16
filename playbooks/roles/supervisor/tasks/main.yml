@@ -24,17 +24,9 @@
     dest: "/etc/supervisor/{{ item }}"
   with_items:
     - supervisord.conf
+    - conf.d/programs.conf
   notify:
     - restart supervisor
-
-- name: programs config
-  template:
-    src: "conf.d/{{ item }}.conf.j2"
-    dest: "/etc/supervisor/conf.d/{{ item }}.conf"
-  with_items: "{{ programs }}"
-  notify:
-    - restart supervisor
-  when: programs is defined
 
 - name: service start
   service:
