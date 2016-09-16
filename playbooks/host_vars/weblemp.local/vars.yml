@@ -28,3 +28,7 @@ nginx_custom_vhosts:
       - name: website
         location: /
         index: website.php
+
+# /etc/hosts custom configuration
+custom_hosts:
+  - sulu.local

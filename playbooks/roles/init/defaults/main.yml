@@ -13,7 +13,24 @@ init_apt_packages:
   - curl
   - wget
   - htop
+  - ntp
+  - fail2ban
+  - logrotate
+  - unzip
 
 # Default pip packages to install
 init_pip_packages:
   - httpie
+
+# /etc/hosts configuration
+custom_hosts: []
+
+# ntp basic configuration
+ntp_servers:
+  - 0.fr.pool.ntp.org
+  - 1.fr.pool.ntp.org
+  - 2.fr.pool.ntp.org
+  - 3.fr.pool.ntp.org
+
+# timezone configuration
+timezone_name: Europe/Paris

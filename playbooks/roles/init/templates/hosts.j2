@@ -1,0 +1,12 @@
+# Basic configuration
+127.0.0.1    localhost {{ ansible_hostname }} {{ ansible_fqdn }}
+
+{% if custom_hosts %}
+# Custom configuration
+127.0.0.1    {% for custom_host in custom_hosts %}{{ custom_host }}{% endfor %}
+{% endif %}
+
+# IPv6 configuration
+::1          localhost ip6-localhost ip6-loopback
+ff02::1      ip6-allnodes
+ff02::2      ip6-allrouters
