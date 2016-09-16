@@ -3,7 +3,7 @@
 - name: install apt packages
   apt:
     name:  "{{ item }}"
-    state: latest
+    state:              latest
     install_recommends: false
     update_cache:       yes
     cache_valid_time:   300
