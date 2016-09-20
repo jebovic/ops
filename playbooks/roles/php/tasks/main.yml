@@ -27,17 +27,21 @@
   with_items:
     - php.ini
 
-- name: newrelic config
+- name: modules config
   template:
     src: "{{ item }}.j2"
     dest: "/etc/php5/mods-available/{{ item }}"
   with_items:
     - newrelic.ini
+    - custom.ini
   notify:
     - restart php-fpm
 
-- name: enable newrelic module
-  shell: /usr/sbin/php5enmod newrelic
+- name: enable modules
+  shell: "/usr/sbin/php5enmod {{ item }}"
+  with_items:
+    - newrelic
+    - custom
   notify:
     - restart php-fpm
 
