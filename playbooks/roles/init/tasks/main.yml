@@ -13,15 +13,6 @@
     cache_valid_time:   300
   with_items: "{{ init_apt_packages }}"
 
-- include: pip.yml
-
-- include: ntp.yml
-
-- name: install pip packages
-  pip:
-    name: "{{ item }}"
-  with_items: "{{ init_pip_packages }}"
-
 - name: update /etc/hosts
   template:
     src: hosts.j2
@@ -29,3 +20,9 @@
     owner: root
     group: root
     mode: 0644
+
+- include: pip.yml
+
+- include: ntp.yml
+
+- include: fail2ban.yml

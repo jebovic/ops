@@ -8,3 +8,133 @@ blackfire_server_token: "{{ vault_blackfire_server_token }}"
 #newrelic keys
 newrelic_sysmond_key: "{{ vault_newrelic_sysmond_key }}"
 newrelic_license: "{{ vault_newrelic_key }}"
+
+# fail2ban custom jails
+fail2ban_jails:
+  DEFAULT:
+    ignoreip: 127.0.0.1/8
+    ignorecommand:
+    bantime : 600
+    findtime: 600
+    maxretry: 3
+    backend: auto
+    usedns: warn
+    destemail: root@localhost
+    sendername: Fail2Ban
+    sender:     fail2ban@localhost
+    banaction:  iptables-multiport
+    mta:        sendmail
+    protocol:   tcp
+    chain:      INPUT
+    action_:    |
+                %(banaction)s[name=%(__name__)s, port="%(port)s", protocol="%(protocol)s", chain="%(chain)s"]
+    action_mw:  |
+                %(banaction)s[name=%(__name__)s, port="%(port)s", protocol="%(protocol)s", chain="%(chain)s"]
+                %(mta)s-whois[name=%(__name__)s, dest="%(destemail)s", protocol="%(protocol)s", chain="%(chain)s", sendername="%(sendername)s"]
+    action_mwl: |
+                %(banaction)s[name=%(__name__)s, port="%(port)s", protocol="%(protocol)s", chain="%(chain)s"]
+                %(mta)s-whois-lines[name=%(__name__)s, dest="%(destemail)s", logpath=%(logpath)s, chain="%(chain)s", sendername="%(sendername)s"]
+    action:     |
+                %(action_)s
+  ssh:
+    enabled:    true
+    port:       ssh
+    filter:     sshd
+    logpath:    /var/log/auth.log
+    maxretry:   6
+  ssh-ddos:
+    enabled:    false
+    port:       ssh
+    filter:     sshd-ddos
+    logpath:    /var/log/auth.log
+    maxretry:   6
+  ssh-route:
+    enabled:    false
+    filter:     sshd
+    action:     route
+    logpath:    /var/log/sshd.log
+    maxretry:   6
+  ssh-iptables-ipset4:
+    enabled:    false
+    port:       ssh
+    filter:     sshd
+    banaction:  iptables-ipset-proto4
+    logpath:    /var/log/sshd.log
+    maxretry:   6
+  ssh-iptables-ipset6:
+    enabled:    false
+    port:       ssh
+    filter:     sshd
+    banaction:  iptables-ipset-proto6
+    logpath:    /var/log/sshd.log
+    maxretry:   6
+  apache:
+    enabled:    false
+    port:       http,https
+    filter:     apache-auth
+    logpath:    /var/log/apache*/*error.log
+    maxretry:   6
+  apache-multiport:
+    enabled:    false
+    port:       http,https
+    filter:     apache-auth
+    logpath:    /var/log/apache*/*error.log
+    maxretry:   6
+  apache-noscript:
+    enabled:    false
+    port:       http,https
+    filter:     apache-noscript
+    logpath:    /var/log/apache*/*error.log
+    maxretry:   6
+  apache-overflows:
+    enabled:    false
+    port:       http,https
+    filter:     apache-overflows
+    logpath:    /var/log/apache*/*error.log
+    maxretry:   2
+  apache-modsecurity:
+    enabled:    false
+    filter:     apache-modsecurity
+    port:       http,https
+    logpath:    /var/log/apache*/*error.log
+    maxretry:   2
+  apache-nohome:
+    enabled:    false
+    filter:     apache-nohome
+    port:       http,https
+    logpath:    /var/log/apache*/*error.log
+    maxretry:   2
+  php-url-fopen:
+    enabled:    false
+    port:       http,https
+    filter:     php-url-fopen
+    logpath:    /var/www/*/logs/access_log
+  nginx-http-auth:
+    enabled:    false
+    filter:     nginx-http-auth
+    port:       http,https
+    logpath:    /var/log/nginx/error.log
+  mysqld-auth:
+    enabled:    false
+    filter:     mysqld-auth
+    port:       3306
+    logpath:    /var/log/mysqld.log
+  recidive:
+    enabled:    false
+    filter:     recidive
+    logpath:    /var/log/fail2ban.log
+    action:     |
+                iptables-allports[name=recidive]
+                sendmail-whois-lines[name=recidive, logpath=/var/log/fail2ban.log]
+    bantime:    604800  ; 1 week
+    findtime:   86400   ; 1 day
+    maxretry:   5
+  ssh-blocklist:
+    enabled:    false
+    filter:     sshd
+    action:     |
+                iptables[name=SSH, port=ssh, protocol=tcp]
+                sendmail-whois[name=SSH, dest="%(destemail)s", sender="%(sender)s", sendername="%(sendername)s"]
+                blocklist_de[email="%(sender)s", apikey="xxxxxx", service="%(filter)s"]
+    logpath:    /var/log/sshd.log
+    maxretry:   20

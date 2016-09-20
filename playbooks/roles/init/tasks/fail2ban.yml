@@ -1,0 +1,20 @@
+---
+
+- name: fail2ban > config
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ fail2ban_root_path }}/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - fail2ban.local
+    - jail.local
+  notify: restart fail2ban
+
+- name: fail2ban > service start
+  service:
+    name:  "{{ item }}"
+    state: started
+  with_items:
+    - fail2ban

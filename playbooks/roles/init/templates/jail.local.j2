@@ -1,0 +1,7 @@
+{% for jail in fail2ban_jails|sort %}
+[{{jail}}]
+{% for key in fail2ban_jails[jail]|sort %}
+{{ key }} = {{ fail2ban_jails[jail][key] }}
+{% endfor %}
+
+{% endfor %}

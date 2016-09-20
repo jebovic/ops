@@ -41,3 +41,9 @@
   become: yes
   changed_when: pip_latest_output.stdout.find('Requirement already up-to-date') == -1
   when: pip_version == None or pip_version == "LATEST"
+
+
+- name: pip > install packages
+  pip:
+    name: "{{ item }}"
+  with_items: "{{ init_pip_packages }}"
