@@ -14,12 +14,12 @@
     mode: 0755
   with_items:
     - url: "{{ mailhog_binary_url }}"
-      dest: "{{ mailhog_install_dir }}/mailhog"
+      dest: "{{ mailhog_bin_path }}"
     - url: "{{ mhsendmail_binary_url }}"
-      dest: "{{ mailhog_install_dir }}/mhsendmail"
+      dest: "{{ mailhog_mhsendmail_path }}"
 
 - name: replace sendmail by mhsendmail link
   file:
-    src: "{{ mailhog_install_dir }}/mhsendmail"
+    src: "{{ mailhog_mhsendmail_path }}"
     dest: "{{ sendmail_bin_path }}"
     state: link
