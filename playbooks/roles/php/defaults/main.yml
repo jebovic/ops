@@ -36,7 +36,12 @@ php_pools:
     pm.max_requests: "500"
 
 # Custom php.ini configs
-php_ini_custom: []
+php_ini_custom:
+  opcache:
+    opcache.blacklist_filename: /etc/php5/fpm/opcache.blacklist
+
+# Opcache blacklist
+php_opcache_blacklist: []
 
 # Php FPM basic configuration
 php_fpm_pid: /run/php5-fpm.pid
@@ -55,41 +60,3 @@ php_fpm_rlimit_core: 0
 php_fpm_events_mechanism: epoll
 php_fpm_systemd_interval: 10
 php_fpm_pools_include: /etc/php5/fpm/pool.d/*.conf
-
-# Newrelic module configuration
-newrelic_enabled: "true"
-newrelic_license: "REPLACE_WITH_REAL_KEY"
-newrelic_logfile: "/var/log/newrelic/php_agent.log"
-newrelic_loglevel: "info"
-newrelic_appname: "{{ ansible_hostname|default('VM Test') }}"
-newrelic_daemon_logfile: "/var/log/newrelic/newrelic-daemon.log"
-newrelic_daemon_loglevel: "info"
-newrelic_daemon_port: "/tmp/.newrelic.sock"
-newrelic_daemon_max_threads: 8
-newrelic_daemon_ssl: "true"
-newrelic_daemon_proxy: false
-newrelic_daemon_pidfile: ""
-newrelic_daemon_location: "/usr/bin/newrelic-daemon"
-newrelic_daemon_collector_host: "collector.newrelic.com"
-newrelic_daemon_dont_launch: 0
-newrelic_capture_params: false
-newrelic_ignored_params: ""
-newrelic_error_collector_enabled: true
-newrelic_error_collector_record_database_errors: false
-newrelic_error_collector_prioritize_api_errors: false
-newrelic_browser_monitoring_auto_instrument: true
-newrelic_transaction_tracer_enabled: true
-newrelic_transaction_tracer_threshold: "apdex_f"
-newrelic_transaction_tracer_detail: 1
-newrelic_transaction_tracer_slow_sql: true
-newrelic_transaction_tracer_stack_trace_threshold: 500
-newrelic_transaction_tracer_explain_enabled: true
-newrelic_transaction_tracer_explain_threshold: 500
-newrelic_transaction_tracer_record_sql: "obfuscated"
-newrelic_transaction_tracer_custom: ""
-newrelic_framework: ""
-newrelic_webtransaction_name_remove_trailing_path: false
-newrelic_webtransaction_name_functions: ""
-newrelic_webtransaction_name_files: ""
-newrelic_daemon_auditlog: "/var/log/newrelic/audit.log"
-newrelic_analytics_events_enabled: true

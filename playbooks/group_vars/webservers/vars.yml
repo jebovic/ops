@@ -12,7 +12,20 @@ supervisor_programs:
 php_ini_custom:
   Session:
     session.save_handler: memcached
-    session.save_path: "{{ memcache_port }}:{{ memcache_listen_address }}"
+    session.save_path: "{{ memcache_listen_address }}:{{ memcache_port }}"
   mail function:
     sendmail_from: me@example.com
     sendmail_path: "{{ mailhog_mhsendmail_path }}"
+  opcache:
+    opcache.enable_cli: Off
+    opcache.blacklist_filename: /etc/php5/fpm/opcache.blacklist
+  newrelic:
+    newrelic.enabled: "true"
+    newrelic.license: "{{ newrelic_license }}"
+    newrelic.logfile: "/var/log/newrelic/php_agent.log"
+    newrelic.appname: "{{ ansible_hostname|default('VM Test') }}"
+    newrelic.daemon.logfile: "/var/log/newrelic/newrelic-daemon.log"
+    newrelic.daemon.port: "/tmp/.newrelic.sock"
+    newrelic.daemon.location: "/usr/bin/newrelic-daemon"
+    newrelic.daemon.collector_host: "collector.newrelic.com"
+    newrelic.analytics_events.enabled: "true"

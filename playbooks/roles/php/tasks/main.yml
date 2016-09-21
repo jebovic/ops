@@ -16,6 +16,7 @@
   with_items:
     - php.ini
     - php-fpm.conf
+    - opcache.blacklist
     - pool.d/pools.conf
   notify:
     - restart php-fpm
@@ -32,7 +33,6 @@
     src: "{{ item }}.j2"
     dest: "/etc/php5/mods-available/{{ item }}"
   with_items:
-    - newrelic.ini
     - custom.ini
   notify:
     - restart php-fpm
