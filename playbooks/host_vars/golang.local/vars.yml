@@ -1,0 +1,18 @@
+---
+
+# list supervisor programs
+supervisor_programs:
+  tactix-demo:
+    command: "{{ go_path }}/bin/tactix-demo"
+    autostart: "true"
+    autorestart: "true"
+    stderr_logfile: "{{ supervisor_log_path }}/tactix-demo-stderr.log"
+    directory: "{{ go_path }}/src"
+    chown: "{{ admin_user }}:{{ admin_user_group }}"
+  tactix-site:
+    command: "{{ go_path }}/bin/tactix-site"
+    autostart: "true"
+    autorestart: "true"
+    stderr_logfile: "{{ supervisor_log_path }}/tactix-demo-stderr.log"
+    directory: "{{ go_path }}/src"
+    chown: "{{ admin_user }}:{{ admin_user_group }}"

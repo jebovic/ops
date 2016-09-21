@@ -49,7 +49,7 @@ Vagrant.configure("2") do |config|
   #   prj.vm.network "private_network", ip: "192.168.1.30"
   #   prj.ssh.guest_port = 2220
   #   prj.vm.network :forwarded_port, guest: 22, host: 2220, id: 'ssh'
-  #   prj.vm.synced_folder "/home/jebovic/projects", "/srv/www", type: "nfs", nfs_udp: true
+  #   prj.vm.synced_folder "/home/jebovic/projects", "/srv/www", id: "v-root", mount_options: ["rw", "tcp", "nolock", "noacl", "async"], type: "nfs", nfs_udp: false
   # end
 
 end

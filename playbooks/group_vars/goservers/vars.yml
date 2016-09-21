@@ -1,0 +1,4 @@
+---
+
+# Go specific vars
+go_path: /srv/golang
