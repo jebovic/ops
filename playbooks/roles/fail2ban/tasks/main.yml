@@ -1,6 +1,16 @@
 ---
 
-- name: fail2ban > config
+- name: install apt packages
+  apt:
+    name:  "{{ item }}"
+    state:              latest
+    install_recommends: false
+    update_cache:       yes
+    cache_valid_time:   300
+  with_items:
+  - fail2ban
+
+- name: config
   template:
     src: "{{ item }}.j2"
     dest: "{{ fail2ban_root_path }}/{{ item }}"
@@ -12,7 +22,7 @@
     - jail.local
   notify: restart fail2ban
 
-- name: fail2ban > service start
+- name: service start
   service:
     name:  "{{ item }}"
     state: started

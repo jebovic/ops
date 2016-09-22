@@ -24,5 +24,3 @@
 - include: pip.yml
 
 - include: ntp.yml
-
-- include: fail2ban.yml

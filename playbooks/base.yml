@@ -7,5 +7,6 @@
   roles:
     - { role: ssh }
     - { role: init }
+    - { role: fail2ban }
     - { role: ohmyzsh }
     - { role: newrelic }
