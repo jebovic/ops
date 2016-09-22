@@ -39,7 +39,7 @@
 - name: add public key to authorized keys
   authorized_key:
     user: "{{ admin_user }}"
-    key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+    key: "{{ admin_authorized_key }}"
     exclusive: yes
 
 - name: "allow '{{ admin_user_group }}' group to have passwordless sudo"
