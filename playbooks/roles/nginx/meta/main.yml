@@ -18,3 +18,4 @@ galaxy_info:
     - Nginx
     - webserver
     - lemp
+dependencies: []

@@ -2,4 +2,4 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - mailhog
+    - ansible-mailhog

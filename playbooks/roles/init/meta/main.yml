@@ -20,3 +20,4 @@ galaxy_info:
     - ntp
     - pip
     - timezone
+dependencies: []

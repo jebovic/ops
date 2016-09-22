@@ -18,3 +18,4 @@ galaxy_info:
     - memcache
     - cache
     - in-memory
+dependencies: []

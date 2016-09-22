@@ -20,3 +20,4 @@ galaxy_info:
     - macros
     - virtualhost
     - lamp
+dependencies: []
