@@ -5,7 +5,13 @@
     name: blackfire-agent
     state: restarted
 
-- name: restart php-fpm
+- name: check if php-fpm service exists
+  stat:
+    path: /etc/init.d/php5-fpm
+  register: service_status
+
+- name: restart php-fpm for blackfire
   service:
     name:  php5-fpm
     state: restarted
+  when: service_status.stat.exists
