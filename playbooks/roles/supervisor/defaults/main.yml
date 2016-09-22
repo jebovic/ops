@@ -1,5 +1,6 @@
 ---
 
+# Supervisor basic configuration
 supervisor_socket: /tmp/supervisor.sock
 supervisor_pidfile: /var/run/supervisord.pid
 supervisor_log_path: /var/log/supervisord

@@ -1,0 +1,22 @@
+galaxy_info:
+  author: Jérémy Baumgarth
+  description: Default init role for needed stuff on all servers
+  company: Amiral Web
+  license: MIT
+  min_ansible_version: 2.1
+  github_branch: master
+  platforms:
+    - name: Ubuntu
+      versions:
+      - trusty
+      - wily
+      - xenial
+    - name: Debian
+      versions:
+      - jessie
+  galaxy_tags:
+    - init
+    - common
+    - ntp
+    - pip
+    - timezone

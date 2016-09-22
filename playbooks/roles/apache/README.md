@@ -1,5 +1,12 @@
----
+Apache
+======
 
+Install and configure apache 2.4 with main macros and custom vhosts
+
+Role Variables
+--------------
+
+```
 # Default apache configuration
 apache_user: www-data
 apache_user_group: www-data
@@ -37,3 +44,23 @@ apache_custom_vhosts:
 
 # Specific link with php fpm
 php_fpm_socket_path: /var/run/php5-fpm.sock
+```
+
+Example Playbook
+----------------
+
+```
+    - hosts: servers
+      roles:
+         - { role: jebovic.apache }
+```
+
+License
+-------
+
+MIT
+
+Author Information
+------------------
+
+Jérémy Baumgarth https://github.com/jebovic
