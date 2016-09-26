@@ -1,0 +1,34 @@
+---
+
+- src: jebovic.haproxy
+  name: haproxy
+
+- src: jebovic.php
+  name: php
+
+- src: jebovic.blackfire
+  name: blackfire
+
+- src: jebovic.composer
+  name: composer
+
+- src: jebovic.memcache
+  name: memcache
+
+- src: jebovic.mysql
+  name: mysql
+
+- src: jebovic.mongodb
+  name: mongodb
+
+- src: jebovic.mailhog
+  name: mailhog
+
+- src: jebovic.supervisor
+  name: supervisor
+
+- src: jebovic.nginx
+  name: nginx
+
+- src: jebovic.apache
+  name: apache

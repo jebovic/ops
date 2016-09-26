@@ -1,0 +1,13 @@
+---
+
+# Include roles needed for base playbook
+- include: base.yml
+
+# Include roles needed for dockerservers playbook
+- include: dockerservers.yml
+
+# Include roles needed for goservers playbook
+- include: goservers.yml
+
+# Include roles needed for webservers playbook
+- include: webservers.yml

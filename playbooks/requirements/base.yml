@@ -1,0 +1,19 @@
+---
+
+- src: jebovic.ssh
+  name: ssh
+
+- src: jebovic.init
+  name: init
+
+- src: jebovic.fail2ban
+  name: fail2ban
+
+- src: jebovic.ohmyzsh
+  name: ohmyzsh
+
+- src: jebovic.newrelic
+  name: newrelic
+
+- src: jebovic.sysdig
+  name: sysdig

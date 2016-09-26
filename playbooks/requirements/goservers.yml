@@ -1,0 +1,10 @@
+---
+
+- src: jebovic.go
+  name: go
+
+- src: jebovic.mongodb
+  name: mongodb
+
+- src: jebovic.supervisor
+  name: supervisor
