@@ -43,6 +43,11 @@ Vagrant.configure("2") do |config|
     prj.vm.synced_folder "/home/jebovic/projects", "/srv/www", id: "v-root", mount_options: ["rw", "tcp", "nolock", "noacl", "async"], type: "nfs", nfs_udp: false
   end
 
+  config.vm.define "docker" do |prj|
+    prj.vm.hostname = "docker.local"
+    prj.vm.network "private_network", ip: "192.168.1.40"
+  end
+
   # Full example, with private network, port forwarding, nfs...
   # config.vm.define "weblemp" do |prj|
   #   prj.vm.hostname = "weblemp.local"
