@@ -35,14 +35,16 @@ Install roles into the roles directory:
 
 ```
 # install all roles from the requirements file to the playbooks/roles directory
-ansible-galaxy install -r playbooks/requirements/all.yml -p playbooks/roles
+cd playbooks/requirements
+ansible-galaxy install -r all.yml -p ../roles
 ```
 
 Alternatively, you can install only the desired roles from other requirements files:
 
 ```
 # install only roles needed for the base playbook
-ansible-galaxy install -r playbooks/requirements/base.yml -p playbooks/roles
+cd playbooks/requirements
+ansible-galaxy install -r base.yml -p ../roles
 ```
 
 ### Run a playbook
