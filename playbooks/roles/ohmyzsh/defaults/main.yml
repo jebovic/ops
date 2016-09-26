@@ -1,5 +1,0 @@
----
-
-# Choose user who you want to install oh my zsh for
-ohmyzsh_for: ops
-go_path: /srv/golang

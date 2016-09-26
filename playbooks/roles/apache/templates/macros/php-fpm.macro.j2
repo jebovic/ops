@@ -1,9 +1,0 @@
-<Macro phpFpmMacro>
-
-    <FilesMatch \.php$>
-        # php fpm no sockect mode
-        # SetHandler proxy:fcgi://127.0.0.1:9002
-        SetHandler "proxy:unix:{{ php_fpm_socket_path }}|fcgi://localhost/"
-    </FilesMatch>
-
-</Macro>

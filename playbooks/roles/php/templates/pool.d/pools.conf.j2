@@ -1,7 +1,0 @@
-{% for pool in php_pools|sort %}
-[{{pool}}]
-{% for key in php_pools[pool]|sort %}
-{{ key }} = {{ php_pools[pool][key] }}
-{% endfor %}
-
-{% endfor %}

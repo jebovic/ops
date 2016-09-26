@@ -1,7 +1,0 @@
-{% for program in supervisor_programs|sort %}
-[program:{{program}}]
-{% for key in supervisor_programs[program]|sort %}
-{{ key }} = {{ supervisor_programs[program][key] }}
-{% endfor %}
-
-{% endfor %}
