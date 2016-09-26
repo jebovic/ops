@@ -10,3 +10,4 @@
     - { role: fail2ban }
     - { role: ohmyzsh }
     - { role: newrelic }
+    - { role: sysdig }
