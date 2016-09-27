@@ -46,6 +46,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "docker" do |prj|
     prj.vm.hostname = "docker.local"
     prj.vm.network "private_network", ip: "192.168.1.40"
+    prj.vm.synced_folder "/home/jebovic/projects/docker-builds", "/srv/docker-builds", id: "v-root", mount_options: ["rw", "tcp", "nolock", "noacl", "async"], type: "nfs", nfs_udp: false
   end
 
   # Full example, with private network, port forwarding, nfs...
