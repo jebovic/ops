@@ -10,8 +10,6 @@
   roles:
     - { role: haproxy }
     - { role: php }
-    - { role: blackfire }
-    - { role: composer }
     - { role: memcache }
     - { role: mysql }
     - { role: mongodb }
