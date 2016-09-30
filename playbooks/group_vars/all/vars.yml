@@ -9,9 +9,12 @@ admin_user_group: admin
 php_blackfire_server_id: "{{ vault_blackfire_server_id }}"
 php_blackfire_server_token: "{{ vault_blackfire_server_token }}"
 
-#newrelic keys
+# newrelic keys
 newrelic_sysmond_key: "{{ vault_newrelic_sysmond_key }}"
 newrelic_license: "{{ vault_newrelic_key }}"
+
+# enable newrelic support for docker
+docker_newrelic_support_enabled: true
 
 # fail2ban custom jails
 fail2ban_jails:
