@@ -12,3 +12,4 @@
     - { role: ohmyzsh }
     - { role: newrelic }
     - { role: sysdig }
+    - { role: redis }

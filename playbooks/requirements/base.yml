@@ -6,6 +6,9 @@
 - src: jebovic.init
   name: init
 
+- src: jebovic.ufw
+  name: ufw
+
 - src: jebovic.fail2ban
   name: fail2ban
 
