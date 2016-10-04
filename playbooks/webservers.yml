@@ -11,6 +11,7 @@
     - { role: haproxy }
     - { role: php }
     - { role: memcache }
+    - { role: redis }
     - { role: mysql }
     - { role: mongodb }
     - { role: mailhog }

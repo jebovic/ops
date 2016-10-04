@@ -9,3 +9,4 @@
   become_method: sudo
   roles:
     - { role: docker }
+    - { role: redis }

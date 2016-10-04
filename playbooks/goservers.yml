@@ -11,3 +11,4 @@
     - { role: go }
     - { role: mongodb }
     - { role: supervisor }
+    - { role: redis }
