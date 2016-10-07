@@ -1,0 +1,24 @@
+golang.local ansible_host=192.168.1.10 ansible_user='ubuntu' ansible_ssh_private_key_file=~/projects/ops/.vagrant/machines/golang/virtualbox/private_key
+ci.local ansible_host=192.168.1.20 ansible_user='ubuntu' ansible_ssh_private_key_file=~/projects/ops/.vagrant/machines/ci/virtualbox/private_key
+weblemp.local ansible_host=192.168.1.30 ansible_user='ubuntu' ansible_ssh_private_key_file=~/projects/ops/.vagrant/machines/weblemp/virtualbox/private_key
+weblamp.local ansible_host=192.168.1.31 ansible_user='ubuntu' ansible_ssh_private_key_file=~/projects/ops/.vagrant/machines/weblamp/virtualbox/private_key
+docker.local ansible_host=192.168.1.40 ansible_user='ubuntu' ansible_ssh_private_key_file=~/projects/ops/.vagrant/machines/docker/virtualbox/private_key
+
+[lampstack]
+weblamp.local
+
+[lempstack]
+weblemp.local
+
+[webservers:children]
+lampstack
+lempstack
+
+[goservers]
+golang.local
+
+[ciservers]
+ci.local
+
+[dockerservers]
+docker.local
