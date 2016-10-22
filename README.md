@@ -29,6 +29,28 @@ vagrant up [golang,ci,weblemp,weblamp,docker,monitoring]
 
 The first step is to get ansible, i'd recomand to [get it from the source](http://docs.ansible.com/ansible/intro_installation.html#running-from-source) to be compatible with all the roles in the different playboks (ansible >= 2.2 required).
 
+### Test your setup : ping
+
+```
+ansible -i inventories/local all -m ping
+ansible -i inventories/local webservers -m ping
+ansible -i inventories/local weblemp.local -m ping
+```
+
+### Test your setup : command
+
+```
+ansible -i inventories/local all -m command -a "cat /etc/os-release"
+ansible -i inventories/local webservers -m command -a "cat /etc/os-release"
+ansible -i inventories/local weblemp.local -m command -a "cat /etc/os-release"
+```
+
+### Test your setup : setup
+
+```
+ansible -i inventories/local weblemp.local -m setup
+```
+
 ### Install roles from Ansible Galaxy
 
 Install roles into the roles directory:
