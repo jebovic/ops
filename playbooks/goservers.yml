@@ -8,6 +8,6 @@
   become: true
   become_method: sudo
   roles:
-    - { role: go }
-    - { role: mongodb }
-    - { role: supervisor }
+    - { role: go, tags: ['golang'] }
+    - { role: mongodb, tags: ['go', 'mongodb'] }
+    - { role: supervisor, tags: ['go', 'supervisor'] }

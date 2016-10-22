@@ -20,7 +20,7 @@ Vagrant configuration (for virtualbox provider only) is present in the Vagrantfi
 Create and up a VM from a simple command:
 
 ```
-vagrant up [golang,ci,weblemp,weblamp,docker]
+vagrant up [golang,ci,weblemp,weblamp,docker,monitoring]
 ```
 
 ## Ansible: Virtual Machine provisioning
@@ -45,11 +45,14 @@ Alternatively, you can install only the desired roles from other requirements fi
 # install only roles needed for the base playbook
 cd playbooks/requirements
 ansible-galaxy install -r base.yml -p ../roles
+
+# Then you can add roles from a more specific playbook
+ansible-galaxy install -r monitoring.yml -p ../roles
 ```
 
 ### Run a playbook
 
-Example #1: run the base playbook on all servers listed in playbooks/inventory/local file
+**Example #1**: run the base playbook on all servers listed in playbooks/inventory/local file
 
 ```
 cd playbooks
@@ -58,9 +61,19 @@ ansible-playbook -i inventories/local base.yml --ask-vault-pass
 
 Note: don't forget to replace variables values from group_vars and host_vars, and replace encrypted values in playbooks/group_vars/all/vault.yml with yours.
 
-Example #2: run the webservers playbook against VM listed into the webservers group of the inventory
+**Example #2**: run the webservers playbook against VM listed into the webservers group of the inventory
 
 ```
 cd playbooks
 ansible-playbook -i inventories/local webservers.yml --limit webservers --ask-vault-pass
 ```
+
+License
+-------
+
+MIT
+
+Author Information
+------------------
+
+Jérémy Baumgarth https://github.com/jebovic

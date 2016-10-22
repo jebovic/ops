@@ -8,4 +8,4 @@
   become: true
   become_method: sudo
   roles:
-    - { role: docker }
+    - { role: docker, tags: ['docker'] }

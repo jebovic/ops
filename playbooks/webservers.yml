@@ -8,25 +8,25 @@
   become: true
   become_method: sudo
   roles:
-    - { role: haproxy }
-    - { role: php }
-    - { role: memcache }
-    - { role: mysql }
-    - { role: mongodb }
-    - { role: mailhog }
-    - { role: _fluentd }
-    - { role: supervisor }
+    - { role: haproxy, tags: ['web', 'haproxy'] }
+    - { role: php, tags: ['web', 'php'] }
+    - { role: memcache, tags: ['web', 'memcache'] }
+    - { role: mysql, tags: ['web', 'mysql'] }
+    - { role: mongodb, tags: ['web', 'mongodb'] }
+    - { role: mailhog, tags: ['web', 'mailhog'] }
+    - { role: fluentd, tags: ['web', 'fluentd'] }
+    - { role: supervisor, tags: ['web', 'supervisor'] }
 
 # Specific lemp environment for webservers (Nginx)
 - hosts: lempstack
   become: true
   become_method: sudo
   roles:
-    - { role: nginx }
+    - { role: nginx, tags: ['web', 'nginx'] }
 
 # Specific lamp environment for webservers (Apache)
 - hosts: lampstack
   become: true
   become_method: sudo
   roles:
-    - { role: apache }
+    - { role: apache, tags: ['web', 'apache'] }

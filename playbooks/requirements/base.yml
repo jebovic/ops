@@ -1,10 +1,10 @@
 ---
 
-- src: jebovic.ssh
-  name: ssh
-
 - src: jebovic.init
   name: init
+
+- src: jebovic.ssh
+  name: ssh
 
 - src: jebovic.ufw
   name: ufw
@@ -20,3 +20,6 @@
 
 - src: jebovic.sysdig
   name: sysdig
+
+- src: jebovic.redis
+  name: redis

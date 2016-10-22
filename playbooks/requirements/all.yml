@@ -9,5 +9,8 @@
 # Include roles needed for goservers playbook
 - include: goservers.yml
 
+# Include roles needed for monitoring playbook
+- include: monitoring.yml
+
 # Include roles needed for webservers playbook
 - include: webservers.yml

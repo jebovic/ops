@@ -1,0 +1,16 @@
+---
+
+- src: jebovic.mailhog
+  name: mailhog
+
+- src: jebovic.fluentd
+  name: fluentd
+
+- src: jebovic.java
+  name: java
+
+- src: jebovic.elasticsearch
+  name: elasticsearch
+
+- src: jebovic.supervisor
+  name: supervisor

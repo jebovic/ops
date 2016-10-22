@@ -8,12 +8,11 @@
   become: true
   become_method: sudo
   roles:
-    - { role: mailhog }
-    - { role: _fluentd, tags: ['fluentd'] }
-    - { role: _java, tags: ['java'] }
-    - { role: _elasticsearch, tags: ['elasticsearch'] }
-#    - { role: _statsd }
-#    - { role: _graphite }
-#    - { role: _grafana }
-#    - { role: _kibana }
-    - { role: supervisor }
+    - { role: mailhog, tags: ['monitoring', 'mailhog'] }
+    - { role: fluentd, tags: ['monitoring', 'fluentd'] }
+    - { role: java, tags: ['monitoring', 'java'] }
+    - { role: elasticsearch, tags: ['monitoring', 'elasticsearch'] }
+    - { role: supervisor, tags: ['monitoring', 'supervisor'] }
+#    - { role: _statsd, tags: ['monitoring', '_statsd'] }
+#    - { role: _graphite, tags: ['monitoring', '_graphite'] }
+#    - { role: _grafana, tags: ['monitoring', '_grafana'] }
