@@ -5,9 +5,9 @@ ENV['VAGRANT_DEFAULT_PROVIDER'] = 'virtualbox'
 
 Vagrant.configure("2") do |config|
 
-  # config.vm.box = "debian/jessie64"
-  # config.vm.box_version = ">= 8.5, < 8.6"
-  config.vm.box = "ubuntu/xenial64"
+  config.vm.box = "debian/jessie64"
+  config.vm.box_version = ">= 8.5, < 8.6"
+  # config.vm.box = "ubuntu/xenial64"
 
   # VirtualBox configuration
   # Disable components that a server doesn't need (usb, gui, audio)
@@ -48,6 +48,11 @@ Vagrant.configure("2") do |config|
     prj.vm.hostname = "docker.local"
     prj.vm.network "private_network", ip: "192.168.1.40"
     prj.vm.synced_folder "/home/jebovic/projects/docker-builds", "/srv/docker-builds", id: "v-root", mount_options: ["rw", "tcp", "nolock", "noacl", "async"], type: "nfs", nfs_udp: false
+  end
+
+  config.vm.define "monitoring" do |prj|
+    prj.vm.hostname = "monitoring.local"
+    prj.vm.network "private_network", ip: "192.168.1.50"
   end
 
   # Full example, with private network, port forwarding, nfs...

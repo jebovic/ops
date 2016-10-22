@@ -14,6 +14,7 @@
     - { role: mysql }
     - { role: mongodb }
     - { role: mailhog }
+    - { role: _fluentd }
     - { role: supervisor }
 
 # Specific lemp environment for webservers (Nginx)

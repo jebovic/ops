@@ -3,6 +3,7 @@ ci.local ansible_host=192.168.1.20 ansible_user='vagrant' ansible_ssh_private_ke
 weblemp.local ansible_host=192.168.1.30 ansible_user='vagrant' ansible_ssh_private_key_file=~/projects/ops/.vagrant/machines/weblemp/virtualbox/private_key
 weblamp.local ansible_host=192.168.1.31 ansible_user='vagrant' ansible_ssh_private_key_file=~/projects/ops/.vagrant/machines/weblamp/virtualbox/private_key
 docker.local ansible_host=192.168.1.40 ansible_user='vagrant' ansible_ssh_private_key_file=~/projects/ops/.vagrant/machines/docker/virtualbox/private_key
+monitoring.local ansible_host=192.168.1.50 ansible_user='vagrant' ansible_ssh_private_key_file=~/projects/ops/.vagrant/machines/monitoring/virtualbox/private_key
 
 [lampstack]
 weblamp.local
@@ -22,3 +23,6 @@ ci.local
 
 [dockerservers]
 docker.local
+
+[monitoringservers]
+monitoring.local

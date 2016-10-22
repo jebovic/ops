@@ -5,8 +5,8 @@
   become: true
   become_method: sudo
   roles:
-    - { role: ssh }
     - { role: init }
+    - { role: ssh }
     - { role: ufw }
     - { role: fail2ban }
     - { role: ohmyzsh }
