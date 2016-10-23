@@ -8,7 +8,6 @@
   become: true
   become_method: sudo
   roles:
-    - { role: mailhog, tags: ['monitoring', 'mailhog'] }
     - { role: fluentd, tags: ['monitoring', 'fluentd'] }
     - { role: java, tags: ['monitoring', 'java'] }
     - { role: elasticsearch, tags: ['monitoring', 'elasticsearch'] }

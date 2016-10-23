@@ -13,3 +13,4 @@
     - { role: newrelic, tags: ['base, 'newrelic'] }
     - { role: sysdig, tags: ['base, 'sysdig'] }
     - { role: redis, tags: ['base, 'redis'] }
+    - { role: mailhog, tags: ['web', 'mailhog'] }
