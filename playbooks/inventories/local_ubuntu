@@ -4,6 +4,7 @@ weblemp.local ansible_host=192.168.1.30 ansible_user='ubuntu' ansible_ssh_privat
 weblamp.local ansible_host=192.168.1.31 ansible_user='ubuntu' ansible_ssh_private_key_file=~/projects/ops/.vagrant/machines/weblamp/virtualbox/private_key
 docker.local ansible_host=192.168.1.40 ansible_user='ubuntu' ansible_ssh_private_key_file=~/projects/ops/.vagrant/machines/docker/virtualbox/private_key
 monitoring.local ansible_host=192.168.1.50 ansible_user='ubuntu' ansible_ssh_private_key_file=~/projects/ops/.vagrant/machines/monitoring/virtualbox/private_key
+test.local ansible_host=192.168.1.100 ansible_user='ubuntu' ansible_ssh_private_key_file=~/projects/ops/.vagrant/machines/test/virtualbox/private_key
 
 [lampstack]
 weblamp.local
@@ -26,3 +27,6 @@ docker.local
 
 [monitoringservers]
 monitoring.local
+
+[testservers]
+test.local

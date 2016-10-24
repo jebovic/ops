@@ -55,6 +55,13 @@ Vagrant.configure("2") do |config|
     prj.vm.network "private_network", ip: "192.168.1.50"
   end
 
+  config.vm.define "test" do |prj|
+    prj.vm.box = "ubuntu/trusty64"
+    prj.vm.box_version = ">= 14.04"
+    prj.vm.hostname = "test.local"
+    prj.vm.network "private_network", ip: "192.168.1.100"
+  end
+
   # Full example, with private network, port forwarding, nfs...
   # config.vm.define "weblemp" do |prj|
   #   prj.vm.hostname = "weblemp.local"
