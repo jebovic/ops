@@ -5,12 +5,12 @@
   become: true
   become_method: sudo
   roles:
-    - { role: init, tags: ['base, 'init'] }
-    - { role: ssh, tags: ['base, 'ssh'] }
-    - { role: ufw, tags: ['base, 'ufw'] }
-    - { role: fail2ban, tags: ['base, 'fail2ban'] }
-    - { role: ohmyzsh, tags: ['base, 'ohmyzsh'] }
-    - { role: newrelic, tags: ['base, 'newrelic'] }
-    - { role: sysdig, tags: ['base, 'sysdig'] }
-    - { role: redis, tags: ['base, 'redis'] }
-    - { role: mailhog, tags: ['web', 'mailhog'] }
+    - { role: init, tags: ['base', 'init'] }
+    - { role: ssh, tags: ['base', 'ssh'] }
+    - { role: ufw, tags: ['base', 'ufw'] }
+    - { role: fail2ban, tags: ['base', 'fail2ban'] }
+    - { role: ohmyzsh, tags: ['base', 'ohmyzsh'] }
+    - { role: newrelic, tags: ['base', 'newrelic'] }
+    - { role: sysdig, tags: ['base', 'sysdig'] }
+    - { role: redis, tags: ['base', 'redis'] }
+    - { role: mailhog, tags: ['base', 'mailhog'] }
