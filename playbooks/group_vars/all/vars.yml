@@ -68,3 +68,7 @@ supervisor_events:
   httpok:
     command: httpok -p mailhog http://localhost:8025
     events: TICK_60
+
+# NPM congfiguration
+nodejs_npm_user: ops
+nodejs_npm_usergroup: admin

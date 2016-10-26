@@ -8,6 +8,7 @@
   become: true
   become_method: sudo
   roles:
+    - { role: nodejs, tags: ['monitoring', 'nodejs'] }
     - { role: fluentd, tags: ['monitoring', 'fluentd'] }
     - { role: java, tags: ['monitoring', 'java'] }
     - { role: elasticsearch, tags: ['monitoring', 'elasticsearch'] }
