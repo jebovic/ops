@@ -4,6 +4,10 @@
 admin_user: ops
 admin_user_group: admin
 
+# NPM congfiguration
+nodejs_npm_user: "{{ admin_user }}"
+nodejs_npm_usergroup: "{{ admin_user_group }}"
+
 # vault_* vars are located in vault.yml encrypted file
 # blackfire.io keys
 php_blackfire_server_id: "{{ vault_blackfire_server_id }}"
@@ -21,6 +25,7 @@ ufw_rules:
   - { port: 22, rule: allow }
   - { port: 80, rule: allow }
   - { port: 443, rule: allow }
+  - { port: 8025, rule: allow } # mailhog UI
 
 # fail2ban custom jails
 fail2ban_jails:
@@ -68,7 +73,3 @@ supervisor_events:
   httpok:
     command: httpok -p mailhog http://localhost:8025
     events: TICK_60
-
-# NPM congfiguration
-nodejs_npm_user: ops
-nodejs_npm_usergroup: admin
