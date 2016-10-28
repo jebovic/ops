@@ -12,5 +12,8 @@
 - src: jebovic.elasticsearch
   name: elasticsearch
 
+- src: jebovic.statsd
+  name: statsd
+
 - src: jebovic.supervisor
   name: supervisor
