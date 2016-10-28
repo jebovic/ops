@@ -33,3 +33,18 @@ fluentd_match_config:
     logstash_prefix: nginx_access
 
 fluentd_filter_config: []
+
+# supervisor programs configuration
+supervisor_programs:
+  statsd:
+    command: "/usr/bin/nodejs stats.js {{ statsd_config_path }}/config.js"
+    directory: "{{ statsd_install_path }}"
+    autostart: "true"
+    autorestart: "true"
+    stderr_logfile: "{{ supervisor_log_path }}/statsd-stderr.log"
+    stderr_logfile_maxbytes: 1MB
+    stderr_logfile_backups: 10
+    stdout_logfile: "{{ supervisor_log_path }}/statsd-stdout.log"
+    stdout_logfile_maxbytes: 1MB
+    stdout_logfile_backups: 10
+    user: "{{ statsd_user }}"

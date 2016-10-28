@@ -12,7 +12,7 @@
     - { role: fluentd, tags: ['monitoring', 'fluentd'] }
     - { role: java, tags: ['monitoring', 'java'] }
     - { role: elasticsearch, tags: ['monitoring', 'elasticsearch'] }
+    - { role: statsd, tags: ['monitoring', 'statsd'] }
     - { role: supervisor, tags: ['monitoring', 'supervisor'] }
-#    - { role: _statsd, tags: ['monitoring', '_statsd'] }
 #    - { role: _graphite, tags: ['monitoring', '_graphite'] }
 #    - { role: _grafana, tags: ['monitoring', '_grafana'] }
