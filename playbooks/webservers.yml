@@ -13,6 +13,7 @@
     - { role: memcache, tags: ['web', 'memcache'] }
     - { role: mysql, tags: ['web', 'mysql'] }
     - { role: mongodb, tags: ['web', 'mongodb'] }
+    - { role: rabbitmq, tags: ['web', 'rabbitmq'] }
     - { role: fluentd, tags: ['web', 'fluentd'] }
     - { role: supervisor, tags: ['web', 'supervisor'] }
 

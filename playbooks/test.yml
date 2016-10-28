@@ -8,4 +8,5 @@
   become: true
   become_method: sudo
   roles:
-    - { role: mongodb, tags: ['go', 'mongodb'] }
+    - { role: go, tags: ['golang'] }
+    - { role: rabbitmq, tags: ['rabbitmq'] }

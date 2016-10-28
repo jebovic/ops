@@ -56,10 +56,9 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "test" do |prj|
-    prj.vm.box = "ubuntu/trusty64"
-    prj.vm.box_version = ">= 14.04"
     prj.vm.hostname = "test.local"
     prj.vm.network "private_network", ip: "192.168.1.100"
+    prj.vm.synced_folder "/home/jebovic/projects/gorabbit", "/srv/golang", id: "v-root", mount_options: ["rw", "tcp", "nolock", "noacl", "async"], type: "nfs", nfs_udp: false
   end
 
   # Full example, with private network, port forwarding, nfs...
