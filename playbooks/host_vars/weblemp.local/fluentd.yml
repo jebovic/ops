@@ -1,0 +1,29 @@
+---
+
+# fluentd configuration
+fluentd_source_config:
+  - "@type": tail
+    path: "/var/log/nginx/sulu.local.access.log"
+    pos_file: "/var/log/td-agent/sulu.local.access.log.pos"
+    tag: nginx.access
+    format: nginx
+
+fluentd_match_config:
+  - pattern: nginx.access
+    "@type": forward
+    send_timeout: 60s
+    recover_wait: 10s
+    heartbeat_interval: 1s
+    phi_threshold: 16
+    hard_timeout: 60s
+    server:
+      name: monitoring.local
+      host: 192.168.1.50
+      port: 24224
+      weight: 60
+
+fluentd_filter_config:
+  - name: nginx.access
+    "@type": record_transformer
+    record:
+      from_host: '"#{Socket.gethostname}"'

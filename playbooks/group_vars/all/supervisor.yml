@@ -1,0 +1,14 @@
+---
+
+# list supervisor programs & events
+supervisor_programs:
+  mailhog:
+    command: /usr/local/bin/mailhog -api-bind-addr :8025 -ui-bind-addr :8025
+    autostart: "true"
+    autorestart: "true"
+    stderr_logfile: "{{ supervisor_log_path }}/mailhog-stderr.log"
+
+supervisor_events:
+  httpok:
+    command: httpok -p mailhog http://localhost:8025
+    events: TICK_60

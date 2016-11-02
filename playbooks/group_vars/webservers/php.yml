@@ -1,18 +1,5 @@
 ---
 
-# firewall rules
-ufw_rules:
-  - { port: 22, rule: allow }
-  - { port: 80, rule: allow }
-  - { port: 443, rule: allow }
-  - { port: 8025, rule: allow }  # mailhog UI
-  - { port: 4369, rule: allow }  # RabbitMQ erlang
-  - { port: 25672, rule: allow } # RabbitMQ erlang
-  - { port: 5672, rule: allow }  # RabbitMQ AMQP
-  - { port: 5671, rule: allow }  # RabbitMQ AMQP
-  - { port: 15672, rule: allow } # RabbitMQ management
-
-
 # Custom php config
 php_ini_custom:
   Session:

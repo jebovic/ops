@@ -1,0 +1,23 @@
+---
+
+# fluentd configuration
+fluentd_plugins:
+  - fluent-plugin-elasticsearch
+
+fluentd_system_config:
+  process_name: fluentd-central
+
+fluentd_source_config:
+  - "@type": forward
+    port: 24224
+
+fluentd_match_config:
+  - pattern: "nginx.access"
+    "@type": elasticsearch
+    host: localhost
+    port: 9201
+    type_name: nginx_access
+    logstash_format: "true"
+    logstash_prefix: nginx_access
+
+fluentd_filter_config: []

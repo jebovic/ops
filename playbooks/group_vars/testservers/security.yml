@@ -11,6 +11,3 @@ ufw_rules:
   - { port: 5672, rule: allow }  # RabbitMQ AMQP
   - { port: 5671, rule: allow }  # RabbitMQ AMQP
   - { port: 15672, rule: allow } # RabbitMQ management
-
-# Go specific vars
-go_path: /srv/golang

@@ -1,0 +1,12 @@
+---
+
+# Basics
+admin_user: ops
+admin_user_group: admin
+
+# NPM congfiguration
+nodejs_npm_user: "{{ admin_user }}"
+nodejs_npm_usergroup: "{{ admin_user_group }}"
+
+# enable newrelic support for docker
+docker_newrelic_support_enabled: true

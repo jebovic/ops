@@ -1,0 +1,5 @@
+---
+
+# /etc/hosts custom configuration
+custom_hosts:
+  - sulu.local

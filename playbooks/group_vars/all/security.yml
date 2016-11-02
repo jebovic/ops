@@ -1,25 +1,5 @@
 ---
 
-# Basics
-admin_user: ops
-admin_user_group: admin
-
-# NPM congfiguration
-nodejs_npm_user: "{{ admin_user }}"
-nodejs_npm_usergroup: "{{ admin_user_group }}"
-
-# vault_* vars are located in vault.yml encrypted file
-# blackfire.io keys
-php_blackfire_server_id: "{{ vault_blackfire_server_id }}"
-php_blackfire_server_token: "{{ vault_blackfire_server_token }}"
-
-# newrelic keys
-newrelic_sysmond_key: "{{ vault_newrelic_sysmond_key }}"
-newrelic_license: "{{ vault_newrelic_key }}"
-
-# enable newrelic support for docker
-docker_newrelic_support_enabled: true
-
 # firewall rules
 ufw_rules:
   - { port: 22, rule: allow }
@@ -60,16 +40,3 @@ fail2ban_jails:
     filter:     sshd
     logpath:    /var/log/auth.log
     maxretry:   6
-
-# list supervisor programs & events
-supervisor_programs:
-  mailhog:
-    command: /usr/local/bin/mailhog -api-bind-addr :8025 -ui-bind-addr :8025
-    autostart: "true"
-    autorestart: "true"
-    stderr_logfile: "{{ supervisor_log_path }}/mailhog-stderr.log"
-
-supervisor_events:
-  httpok:
-    command: httpok -p mailhog http://localhost:8025
-    events: TICK_60
