@@ -1,0 +1,45 @@
+---
+
+# Configure nginx vhosts
+nginx_custom_vhosts:
+  - port: "{{ nginx_port }}"
+    server_name: "elastic.{{ ansible_fqdn }}"
+    access_log: /var/log/nginx/elastic.access.log
+    error_log: /var/log/nginx/elastic.error.log
+    misc: |
+           location / {
+               proxy_pass       http://localhost:9201;
+               proxy_set_header Host      $host;
+               proxy_set_header X-Real-IP $remote_addr;
+           }
+  - port: "{{ nginx_port }}"
+    server_name: "kibana.{{ ansible_fqdn }}"
+    access_log: /var/log/nginx/kibana.access.log
+    error_log: /var/log/nginx/kibana.error.log
+    misc: |
+           location / {
+               proxy_pass       http://localhost:5601;
+               proxy_set_header Host      $host;
+               proxy_set_header X-Real-IP $remote_addr;
+           }
+  - port: "{{ nginx_port }}"
+    server_name: "supervisor.{{ ansible_fqdn }}"
+    access_log: /var/log/nginx/supervisor.access.log
+    error_log: /var/log/nginx/supervisor.error.log
+    misc: |
+           location / {
+               proxy_pass       http://localhost:9988;
+               proxy_set_header Host      $host;
+               proxy_set_header X-Real-IP $remote_addr;
+           }
+  - port: "{{ nginx_port }}"
+    server_name: "mailhog.{{ ansible_fqdn }}"
+    access_log: /var/log/nginx/mailhog.access.log
+    error_log: /var/log/nginx/mailhog.error.log
+    misc: |
+           location / {
+               proxy_pass       http://localhost:8025;
+               proxy_set_header Host      $host;
+               proxy_set_header X-Real-IP $remote_addr;
+           }
+

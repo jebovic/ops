@@ -14,5 +14,6 @@
     - { role: elasticsearch, tags: ['monitoring', 'elasticsearch'] }
     - { role: statsd, tags: ['monitoring', 'statsd'] }
     - { role: supervisor, tags: ['monitoring', 'supervisor'] }
+    - { role: nginx, tags: ['monitoring', 'nginx'] }
 #    - { role: _graphite, tags: ['monitoring', '_graphite'] }
 #    - { role: _grafana, tags: ['monitoring', '_grafana'] }

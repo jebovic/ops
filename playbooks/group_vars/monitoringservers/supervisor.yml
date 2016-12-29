@@ -1,5 +1,8 @@
 ---
 
+
+supervisor_http_host: "localhost"
+
 # supervisor programs configuration
 supervisor_programs:
   statsd:
@@ -14,3 +17,12 @@ supervisor_programs:
     stdout_logfile_maxbytes: 1MB
     stdout_logfile_backups: 10
     user: "{{ statsd_user }}"
+  mailhog:
+    command: /usr/local/bin/mailhog -api-bind-addr :8025 -ui-bind-addr :8025
+    autostart: "true"
+    autorestart: "true"
+    stderr_logfile: "{{ supervisor_log_path }}/mailhog-stderr.log"
+  supervisor_events:
+    httpok:
+    command: httpok -p mailhog http://localhost:8025
+    events: TICK_60
