@@ -12,8 +12,8 @@ Vagrant.configure("2") do |config|
   # VirtualBox configuration
   # Disable components that a server doesn't need (usb, gui, audio)
   config.vm.provider "virtualbox" do |v|
-    v.memory = 1024
-    v.cpus = 1
+    v.memory = 3072
+    v.cpus = 2
     v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     v.customize ["modifyvm", :id, "--audio", "none"]
     v.customize ["modifyvm", :id, "--usb", "off"]
@@ -23,48 +23,48 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "golang" do |prj|
     prj.vm.hostname = "golang.local"
-    prj.vm.network "private_network", ip: "192.168.1.10"
+    prj.vm.network "private_network", ip: "192.168.42.10"
     prj.vm.synced_folder "/home/jebovic/projects/gosample", "/srv/golang", id: "v-root", mount_options: ["rw", "tcp", "nolock", "noacl", "async"], type: "nfs", nfs_udp: false
   end
 
   config.vm.define "ci" do |prj|
     prj.vm.hostname = "ci.local"
-    prj.vm.network "private_network", ip: "192.168.1.20"
+    prj.vm.network "private_network", ip: "192.168.42.20"
   end
 
   config.vm.define "weblemp" do |prj|
     prj.vm.hostname = "weblemp.local"
-    prj.vm.network "private_network", ip: "192.168.1.30"
+    prj.vm.network "private_network", ip: "192.168.42.30"
     prj.vm.synced_folder "/home/jebovic/projects", "/srv/www", id: "v-root", mount_options: ["rw", "tcp", "nolock", "noacl", "async"], type: "nfs", nfs_udp: false
   end
 
   config.vm.define "weblamp" do |prj|
     prj.vm.hostname = "weblamp.local"
-    prj.vm.network "private_network", ip: "192.168.1.31"
+    prj.vm.network "private_network", ip: "192.168.42.31"
     prj.vm.synced_folder "/home/jebovic/projects", "/srv/www", id: "v-root", mount_options: ["rw", "tcp", "nolock", "noacl", "async"], type: "nfs", nfs_udp: false
   end
 
   config.vm.define "docker" do |prj|
     prj.vm.hostname = "docker.local"
-    prj.vm.network "private_network", ip: "192.168.1.40"
+    prj.vm.network "private_network", ip: "192.168.42.40"
     prj.vm.synced_folder "/home/jebovic/projects/docker-builds", "/srv/docker-builds", id: "v-root", mount_options: ["rw", "tcp", "nolock", "noacl", "async"], type: "nfs", nfs_udp: false
   end
 
   config.vm.define "monitoring" do |prj|
     prj.vm.hostname = "monitoring.local"
-    prj.vm.network "private_network", ip: "192.168.1.50"
+    prj.vm.network "private_network", ip: "192.168.42.50"
   end
 
   config.vm.define "test" do |prj|
     prj.vm.hostname = "test.local"
-    prj.vm.network "private_network", ip: "192.168.1.100"
+    prj.vm.network "private_network", ip: "192.168.42.100"
     prj.vm.synced_folder "/home/jebovic/projects/gorabbit", "/srv/golang", id: "v-root", mount_options: ["rw", "tcp", "nolock", "noacl", "async"], type: "nfs", nfs_udp: false
   end
 
   # Full example, with private network, port forwarding, nfs...
   # config.vm.define "weblemp" do |prj|
   #   prj.vm.hostname = "weblemp.local"
-  #   prj.vm.network "private_network", ip: "192.168.1.30"
+  #   prj.vm.network "private_network", ip: "192.168.42.30"
   #   prj.ssh.guest_port = 2220
   #   prj.vm.network :forwarded_port, guest: 22, host: 2220, id: 'ssh'
   #   prj.vm.synced_folder "/home/jebovic/projects", "/srv/www", id: "v-root", mount_options: ["rw", "tcp", "nolock", "noacl", "async"], type: "nfs", nfs_udp: false

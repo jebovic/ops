@@ -1,0 +1,11 @@
+container_id=$(mktemp)
+
+sudo docker pull jebovic/debianjessie-ansible:latest
+
+sudo docker run --detach --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro --volume=/home/ops/ansible-nodejs:/etc/ansible/roles/role_under_test:ro ${run_opts} jebovic/debianjessie-ansible:latest "/sbin/init" > "${container_id}"
+
+sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/test.yml --syntax-check
+
+sudo docker exec "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/test.yml
+
+sudo docker exec -t -i "$(cat ${container_id})" env TERM=xterm bash
