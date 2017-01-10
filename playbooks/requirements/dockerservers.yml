@@ -2,3 +2,12 @@
 
 - src: jebovic.docker
   name: docker
+
+- src: jebovic.consul
+  name: consul
+
+- src: jebovic.traefik
+  name: traefik
+
+- src: jebovic.supervisor
+  name: supervisor

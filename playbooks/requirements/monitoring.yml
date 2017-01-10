@@ -15,5 +15,8 @@
 - src: jebovic.statsd
   name: statsd
 
+- src: jebovic.consul
+  name: consul
+
 - src: jebovic.supervisor
   name: supervisor
