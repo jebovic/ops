@@ -5,14 +5,12 @@ ufw_rules:
   - { port: 22, rule: allow }
   - { port: 80, rule: allow }
   - { port: 443, rule: allow }
+  - { port: 8000, rule: allow }  # api platform
   - { port: 8025, rule: allow }  # mailhog UI
-  - { port: 9988, rule: allow }  # supervisor UI
-  - { port: 9201, rule: allow }  # elasticsearch
-  - { port: 9301, rule: allow }  # elasticsearch TCP transport
-  - { port: 5601, rule: allow }  # kibana
+  - { port: 8080, rule: allow }  # Traefik UI
   - { port: 8300, rule: allow }  # Consul cluster bind port
   - { port: 8301, rule: allow }  # Consul cluster bind port
   - { port: 8500, rule: allow }  # Consul UI
   - { port: 8600, rule: allow, proto: any }  # DNS server
   - { port: 8600, direction: out, rule: allow, proto: any }    # DNS server
-  - { port: 24224, rule: allow } # fluentd forwarder
+  - { port: 9988, rule: allow }  # supervisor UI

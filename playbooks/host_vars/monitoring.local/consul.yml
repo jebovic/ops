@@ -1,0 +1,30 @@
+---
+
+# Consul services definitions
+consul_services:
+  - name: consul
+    check:
+      interval: 10s
+      script: "echo 'Ping Consul on localhost:8500' && curl localhost:8500 >/dev/null 2>&1 && (echo 'OK'; exit 0) || (echo 'KO';exit 1)"
+    port: 8500
+    tags:
+      - http api
+      - supervisor
+  - name: mailhog
+    check:
+      interval: 10s
+      script: "echo 'Ping Mailhog on localhost:8025' && curl localhost:8025 >/dev/null 2>&1 && (echo 'OK'; exit 0) || (echo 'KO';exit 1)"
+    port: 8025
+    tags:
+      - mail catcher
+      - supervisor
+
+consul_checks:
+  - name: Health - ping
+    interval: 30s
+    script: "ping -c1 google.com"
+  - name: Health - supervisor
+    interval: 30s
+    script: "supervisorctl status"
+    tags:
+      - supervisor

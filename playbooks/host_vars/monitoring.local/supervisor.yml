@@ -1,9 +1,7 @@
 ---
 
-
-supervisor_http_host: "localhost"
-
 # supervisor programs configuration
+supervisor_http_host: 127.0.0.1
 supervisor_programs:
   statsd:
     command: "/usr/bin/nodejs stats.js {{ statsd_config_path }}/config.js"
@@ -17,12 +15,23 @@ supervisor_programs:
     stdout_logfile_maxbytes: 1MB
     stdout_logfile_backups: 10
     user: "{{ statsd_user }}"
+  consul:
+    command: "{{ consul_bin_path }} agent -bind={{ ansible_host }} -client=0.0.0.0 -node={{ ansible_fqdn }} -server -bootstrap-expect=2 -retry-join=192.168.42.40 -http-port 8500 -data-dir={{ consul_data_dir }} -config-dir={{ consul_config_dir }} -domain={{ ansible_fqdn }}."
+    autostart: "true"
+    autorestart: "true"
+    stderr_logfile: "{{ supervisor_log_path }}/consul-stderr.log"
+    stderr_logfile_maxbytes: 1MB
+    stderr_logfile_backups: 10
+    stdout_logfile: "{{ supervisor_log_path }}/consul-stdout.log"
+    stdout_logfile_maxbytes: 1MB
+    stdout_logfile_backups: 10
   mailhog:
     command: /usr/local/bin/mailhog -api-bind-addr :8025 -ui-bind-addr :8025
     autostart: "true"
     autorestart: "true"
     stderr_logfile: "{{ supervisor_log_path }}/mailhog-stderr.log"
-  supervisor_events:
-    httpok:
+
+supervisor_events:
+  httpok:
     command: httpok -p mailhog http://localhost:8025
     events: TICK_60

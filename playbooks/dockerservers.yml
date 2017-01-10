@@ -9,3 +9,6 @@
   become_method: sudo
   roles:
     - { role: docker, tags: ['docker'] }
+    - { role: consul, tags: ['consul'] }
+    - { role: traefik, tags: ['traefik'] }
+    - { role: supervisor, tags: ['supervisor'] }
