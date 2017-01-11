@@ -12,7 +12,7 @@ ufw_rules:
   - { port: 5601, rule: allow }  # kibana
   - { port: 8300, rule: allow }  # Consul cluster bind port
   - { port: 8301, rule: allow }  # Consul cluster bind port
-  - { port: 8500, rule: allow }  # Consul UI
+  - { port: "{{ consul_http_port }}", rule: allow }  # Consul UI
   - { port: 8600, rule: allow, proto: any }  # DNS server
   - { port: 8600, direction: out, rule: allow, proto: any }    # DNS server
   - { port: 24224, rule: allow } # fluentd forwarder

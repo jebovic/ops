@@ -14,7 +14,7 @@ supervisor_programs:
     stdout_logfile_maxbytes: 1MB
     stdout_logfile_backups: 10
   consul:
-    command: "{{ consul_bin_path }} agent -ui -bind={{ ansible_host }} -client=0.0.0.0 -node={{ ansible_fqdn }} -bootstrap -server -http-port 8500 -data-dir={{ consul_data_dir }} -config-dir={{ consul_config_dir }} -domain={{ ansible_fqdn }}."
+    command: "{{ consul_bin_path }} agent -ui -bind={{ ansible_host }} -client=0.0.0.0 -node={{ ansible_fqdn }} -bootstrap -server -http-port {{ consul_http_port }} -data-dir={{ consul_data_dir }} -config-dir={{ consul_config_dir }} -domain={{ ansible_fqdn }}."
     autostart: "true"
     autorestart: "true"
     stderr_logfile: "{{ supervisor_log_path }}/consul-stderr.log"

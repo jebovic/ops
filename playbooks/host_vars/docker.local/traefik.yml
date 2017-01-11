@@ -8,12 +8,12 @@ traefik_static_config: |
                         [web.statistics]
 
                         #[consul]
-                        #endpoint = "127.0.0.1:8500"
+                        #endpoint = "127.0.0.1:{{ consul_http_port }}"
                         #watch = true
                         #prefix = "traefik"
 
                         [consulCatalog]
-                        endpoint = "127.0.0.1:8500"
+                        endpoint = "127.0.0.1:{{ consul_http_port }}"
                         domain = "service.docker.local"
                         prefix = "traefik"
 
@@ -49,7 +49,7 @@ traefik_dynamic_config: |
                              [backends.consul.circuitbreaker]
                                expression = "NetworkErrorRatio() > 0.5"
                              [backends.consul.servers.server1]
-                             url = "http://127.0.0.1:8500"
+                             url = "http://127.0.0.1:{{ consul_http_port }}"
                            [backends.traefik]
                              [backends.traefik.circuitbreaker]
                                expression = "NetworkErrorRatio() > 0.5"

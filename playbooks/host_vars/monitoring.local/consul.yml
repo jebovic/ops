@@ -5,8 +5,8 @@ consul_services:
   - name: consul
     check:
       interval: 10s
-      script: "echo 'Ping Consul on localhost:8500' && curl localhost:8500 >/dev/null 2>&1 && (echo 'OK'; exit 0) || (echo 'KO';exit 1)"
-    port: 8500
+      script: "echo 'Ping Consul on localhost:{{ consul_http_port }}' && curl localhost:{{ consul_http_port }} >/dev/null 2>&1 && (echo 'OK'; exit 0) || (echo 'KO';exit 1)"
+    port: "{{ consul_http_port }}"
     tags:
       - http api
       - supervisor
