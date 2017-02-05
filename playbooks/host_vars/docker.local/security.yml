@@ -5,9 +5,9 @@ ufw_rules:
   - { port: 22, rule: allow }
   - { port: 80, rule: allow }
   - { port: 443, rule: allow }
-  - { port: 8000, rule: allow }  # api platform
   - { port: 8025, rule: allow }  # mailhog UI
   - { port: 8080, rule: allow }  # Traefik UI
+  - { port: 8200, rule: allow }  # Vault API
   - { port: 8300, rule: allow }  # Consul cluster bind port
   - { port: 8301, rule: allow }  # Consul cluster bind port
   - { port: "{{ consul_http_port }}", rule: allow }  # Consul UI

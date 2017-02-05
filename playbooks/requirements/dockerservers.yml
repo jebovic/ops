@@ -3,6 +3,9 @@
 - src: jebovic.docker
   name: docker
 
+- src: jebovic.vault
+  name: vault
+
 - src: jebovic.consul
   name: consul
 

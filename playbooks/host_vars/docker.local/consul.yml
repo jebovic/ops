@@ -1,6 +1,11 @@
 ---
 
 # Consul services definitions
+consul_http_port: 8500
+consul_config:
+  datacenter: local-dc1
+  acl_datacenter: local-dc1
+  acl_master_token: "{{ secret_consul_master_token }}" # from _vars_enc.yml (ansible vaulted)
 consul_services:
   - name: traefik
     check:
@@ -26,20 +31,6 @@ consul_services:
     tags:
       - mail catcher
       - supervisor
-  - name: docker containers
-    check:
-      interval: 10s
-      script: "docker ps | grep -e 'apiplatform_web' && docker ps | grep apiplatform_database && (echo 'OK'; exit 0) || (echo 'KO';exit 1)"
-    tags:
-      - docker
-  - name: api-platform
-    check:
-      interval: 10s
-      script: "docker ps | grep -e 'apiplatform_web' && docker ps | grep apiplatform_database && (echo 'OK'; exit 0) || (echo 'KO';exit 1)"
-    port: 8000
-    tags:
-      - web
-      - docker
 
 consul_checks:
   - name: Health - ping

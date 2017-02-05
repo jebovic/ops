@@ -1,0 +1,55 @@
+---
+
+fluentd_packages:
+  - td-agent
+  - build-essential
+  - libgeoip-dev
+
+# fluentd configuration
+fluentd_plugins:
+  - fluent-plugin-elasticsearch
+  - fluent-plugin-geoip
+
+fluentd_system_config:
+  process_name: fluentd-central
+
+fluentd_source_config:
+  - "@type": forward
+    port: 24224
+  - "@type": tail
+    path: "/var/log/nginx/aucapi_access_light.log"
+    pos_file: "/var/log/td-agent/aucapi_access.log.pos"
+    tag: local_nginx.access
+    format: nginx
+    read_from_head: "true"
+
+fluentd_match_config:
+  - pattern: "*nginx.access"
+    "@type": elasticsearch
+    host: localhost
+    port: 9201
+    type_name: nginx_access
+    logstash_format: "true"
+    logstash_prefix: nginx_access
+
+fluentd_filter_config:
+  - name: local_nginx.access
+    "@type": record_transformer
+    record:
+      from_host: '"#{Socket.gethostname}"'
+  - name: local_nginx.access
+    "@type": geoip
+    geoip_lookup_key: remote
+    record:
+      location:        "'[${longitude[\"remote\"]},${latitude[\"remote\"]}]'"
+      latitude:        '${latitude["remote"]}'
+      longitude:       '${longitude["remote"]}'
+      country_code3:   '${country_code3["remote"]}'
+      country:         '${country_code["remote"]}'
+      country_name:    '${country_name["remote"]}'
+      dma:             '${dma_code["remote"]}'
+      area:            '${area_code["remote"]}'
+      region:          '${region["remote"]}'
+      city:            '${city["remote"]}'
+    tag: "geoip.${tag}"
+    skip_adding_null_record: "true"

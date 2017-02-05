@@ -3,5 +3,6 @@
 # Add specific vars here
 java_apt_repositories:
   - deb http://http.debian.net/debian jessie-backports main
+java_apt_default_repo: jessie-backports
 java_packages:
   - openjdk-8-jre

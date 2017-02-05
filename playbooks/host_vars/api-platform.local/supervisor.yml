@@ -23,6 +23,16 @@ supervisor_programs:
     stdout_logfile: "{{ supervisor_log_path }}/consul-stdout.log"
     stdout_logfile_maxbytes: 1MB
     stdout_logfile_backups: 10
+  vault:
+    command: "{{ vault_bin_path }} a"
+    autostart: "true"
+    autorestart: "true"
+    stderr_logfile: "{{ supervisor_log_path }}/consul-stderr.log"
+    stderr_logfile_maxbytes: 1MB
+    stderr_logfile_backups: 10
+    stdout_logfile: "{{ supervisor_log_path }}/consul-stdout.log"
+    stdout_logfile_maxbytes: 1MB
+    stdout_logfile_backups: 10
   mailhog:
     command: /usr/local/bin/mailhog -api-bind-addr :8025 -ui-bind-addr :8025
     autostart: "true"
