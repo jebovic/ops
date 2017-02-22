@@ -1,6 +1,7 @@
 ---
 
 # Supervisor programs configuration
+supervisor_user: root
 supervisor_http_host: 127.0.0.1
 supervisor_programs:
   traefik:
@@ -13,6 +14,7 @@ supervisor_programs:
     stdout_logfile: "{{ supervisor_log_path }}/traefik-stdout.log"
     stdout_logfile_maxbytes: 1MB
     stdout_logfile_backups: 10
+    user: root
   consul:
     command: "{{ consul_bin_path }} agent -ui -bind={{ ansible_host }} -client=0.0.0.0 -node={{ ansible_fqdn }} -bootstrap -server -http-port {{ consul_http_port }} -data-dir={{ consul_data_dir }} -config-dir={{ consul_config_dir }} -domain={{ ansible_fqdn }}."
     autostart: "true"
@@ -23,6 +25,7 @@ supervisor_programs:
     stdout_logfile: "{{ supervisor_log_path }}/consul-stdout.log"
     stdout_logfile_maxbytes: 1MB
     stdout_logfile_backups: 10
+    user: root
   vault:
     command: "{{ vault_bin_path }} server -config={{ vault_config_dir }}/config.hcl"
     autostart: "true"
@@ -33,6 +36,7 @@ supervisor_programs:
     stdout_logfile: "{{ supervisor_log_path }}/vault-stdout.log"
     stdout_logfile_maxbytes: 1MB
     stdout_logfile_backups: 10
+    user: root
   mailhog:
     command: /usr/local/bin/mailhog -api-bind-addr :8025 -ui-bind-addr :8025
     autostart: "true"
