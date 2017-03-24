@@ -8,6 +8,7 @@ test.local ansible_host=192.168.42.100 ansible_user='vagrant' ansible_ssh_privat
 
 api-platform.local ansible_host=192.168.42.110 ansible_user='vagrant' ansible_ssh_private_key_file=~/projects/ops/.vagrant/machines/api-platform/virtualbox/private_key
 api-platform2.local ansible_host=192.168.42.111 ansible_user='vagrant' ansible_ssh_private_key_file=~/projects/ops/.vagrant/machines/api-platform2/virtualbox/private_key
+api-platform3.local ansible_host=192.168.42.112 ansible_user='vagrant' ansible_ssh_private_key_file=~/projects/ops/.vagrant/machines/api-platform3/virtualbox/private_key
 
 [lampstack]
 weblamp.local
@@ -29,9 +30,15 @@ ci.local
 docker.local
 api-platform.local
 api-platform2.local
+api-platform3.local
 
 [monitoringservers]
 monitoring.local
 
 [testservers]
 test.local
+
+[apiplatform-demo]
+api-platform.local
+api-platform2.local
+api-platform3.local
