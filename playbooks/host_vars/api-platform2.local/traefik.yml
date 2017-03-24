@@ -12,6 +12,15 @@ traefik_static_config: |
                         domain = "service.api-platform.local"
                         prefix = "traefik"
 
+                        #[file]
+                        #filename = "/etc/traefik/rules.toml"
+                        #watch = true
+
+                        #[docker]
+                        #endpoint = "unix:///var/run/docker.sock"
+                        #domain = "local"
+                        #watch = true
+
 traefik_dynamic_config: |
                          [frontends]
                            [frontends.consul]
