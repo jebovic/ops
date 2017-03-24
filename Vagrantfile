@@ -6,7 +6,7 @@ ENV['VAGRANT_DEFAULT_PROVIDER'] = 'virtualbox'
 Vagrant.configure("2") do |config|
 
   config.vm.box = "debian/jessie64"
-  config.vm.box_version = ">= 8.5, < 8.7"
+  config.vm.box_version = ">= 8.5, < 9"
   # config.vm.box = "ubuntu/xenial64"
 
   # VirtualBox configuration
@@ -70,6 +70,12 @@ Vagrant.configure("2") do |config|
   config.vm.define "api-platform2" do |prj|
     prj.vm.hostname = "api-platform2.local"
     prj.vm.network "private_network", ip: "192.168.42.111"
+    prj.vm.synced_folder "/home/jebovic/projects/api-platform", "/srv", id: "v-root", mount_options: ["rw", "tcp", "nolock", "noacl", "async"], type: "nfs", nfs_udp: false
+  end
+
+  config.vm.define "api-platform3" do |prj|
+    prj.vm.hostname = "api-platform3.local"
+    prj.vm.network "private_network", ip: "192.168.42.112"
     prj.vm.synced_folder "/home/jebovic/projects/api-platform", "/srv", id: "v-root", mount_options: ["rw", "tcp", "nolock", "noacl", "async"], type: "nfs", nfs_udp: false
   end
 
