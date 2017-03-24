@@ -1,0 +1,35 @@
+---
+
+# Supervisor programs configuration
+supervisor_http_host: 127.0.0.1
+supervisor_programs:
+  traefik:
+    command: "{{ traefik_bin_path }} -c {{ traefik_config_dir }}/traefik.toml"
+    autostart: "true"
+    autorestart: "true"
+    stderr_logfile: "{{ supervisor_log_path }}/traefik-stderr.log"
+    stderr_logfile_maxbytes: 1MB
+    stderr_logfile_backups: 10
+    stdout_logfile: "{{ supervisor_log_path }}/traefik-stdout.log"
+    stdout_logfile_maxbytes: 1MB
+    stdout_logfile_backups: 10
+  consul:
+    command: "{{ consul_bin_path }} agent -ui -bind={{ ansible_host }} -client=0.0.0.0 -node={{ ansible_fqdn }} -retry-join 192.168.42.110 -http-port {{ consul_http_port }} -data-dir={{ consul_data_dir }} -config-dir={{ consul_config_dir }} -domain={{ ansible_fqdn }}."
+    autostart: "true"
+    autorestart: "true"
+    stderr_logfile: "{{ supervisor_log_path }}/consul-stderr.log"
+    stderr_logfile_maxbytes: 1MB
+    stderr_logfile_backups: 10
+    stdout_logfile: "{{ supervisor_log_path }}/consul-stdout.log"
+    stdout_logfile_maxbytes: 1MB
+    stdout_logfile_backups: 10
+  mailhog:
+    command: /usr/local/bin/mailhog -api-bind-addr :8025 -ui-bind-addr :8025
+    autostart: "true"
+    autorestart: "true"
+    stderr_logfile: "{{ supervisor_log_path }}/mailhog-stderr.log"
+
+supervisor_events:
+  httpok:
+    command: httpok -p mailhog http://localhost:8025
+    events: TICK_60

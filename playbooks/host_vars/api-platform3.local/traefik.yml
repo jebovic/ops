@@ -1,0 +1,57 @@
+---
+
+# Traefik custom configuration
+traefik_static_config: |
+                        [web]
+                        address = ":8080"
+                        ReadOnly = false
+                        [web.statistics]
+
+                        [consulCatalog]
+                        endpoint = "127.0.0.1:{{ consul_http_port }}"
+                        domain = "service.api-platform.local"
+                        prefix = "traefik"
+
+                        #[file]
+                        #filename = "/etc/traefik/rules.toml"
+                        #watch = true
+
+                        #[docker]
+                        #endpoint = "unix:///var/run/docker.sock"
+                        #domain = "local"
+                        #watch = true
+
+traefik_dynamic_config: |
+                         [frontends]
+                           [frontends.consul]
+                           backend = "consul"
+                           entrypoints = ["http"]
+                             [frontends.consul.routes.host1]
+                             rule = "Host: consul.api-platform.local"
+                           [frontends.traefik]
+                           backend = "traefik"
+                           entrypoints = ["http"]
+                             [frontends.traefik.routes.host1]
+                             rule = "Host: traefik.api-platform.local"
+                           [frontends.supervisor]
+                           backend = "supervisor"
+                           entrypoints = ["http"]
+                             [frontends.supervisor.routes.host1]
+                             rule = "Host: supervisor.api-platform.local"
+
+                         [backends]
+                           [backends.consul]
+                             [backends.consul.circuitbreaker]
+                               expression = "NetworkErrorRatio() > 0.5"
+                             [backends.consul.servers.server1]
+                             url = "http://127.0.0.1:{{ consul_http_port }}"
+                           [backends.traefik]
+                             [backends.traefik.circuitbreaker]
+                               expression = "NetworkErrorRatio() > 0.5"
+                             [backends.traefik.servers.server1]
+                             url = "http://127.0.0.1:8080"
+                           [backends.supervisor]
+                             [backends.supervisor.circuitbreaker]
+                               expression = "NetworkErrorRatio() > 0.5"
+                             [backends.supervisor.servers.server1]
+                             url = "http://127.0.0.1:9988"

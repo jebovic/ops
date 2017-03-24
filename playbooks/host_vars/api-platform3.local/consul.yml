@@ -1,0 +1,54 @@
+---
+
+# Consul services definitions
+consul_http_port: 8500
+consul_config:
+  datacenter: local-dc1
+#consul_services:
+#  - name: api-platform
+#    check:
+#      interval: 10s
+#      script: "docker ps | grep -e 'srv_web' && docker ps | grep srv_database && (echo 'OK'; exit 0) || (echo 'KO';exit 1)"
+#    port: 8000
+#    tags:
+#      - web
+consul_services:
+  - name: traefik
+    check:
+      interval: 10s
+      script: "echo 'Ping traefik on localhost:8080' && curl localhost:8080 >/dev/null 2>&1 && (echo 'OK'; exit 0) || (echo 'KO';exit 1)"
+    port: 8080
+    tags:
+      - reverse proxy
+      - supervisor
+  - name: consul
+    check:
+      interval: 10s
+      script: "echo 'Ping Consul on localhost:{{ consul_http_port }}' && curl localhost:{{ consul_http_port }} >/dev/null 2>&1 && (echo 'OK'; exit 0) || (echo 'KO';exit 1)"
+    port: "{{ consul_http_port }}"
+    tags:
+      - http api
+      - supervisor
+  - name: mailhog
+    check:
+      interval: 10s
+      script: "echo 'Ping Mailhog on localhost:8025' && curl localhost:8025 >/dev/null 2>&1 && (echo 'OK'; exit 0) || (echo 'KO';exit 1)"
+    port: 8025
+    tags:
+      - mail catcher
+      - supervisor
+
+consul_checks:
+  - name: Health - ping
+    interval: 30s
+    script: "ping -c1 google.com"
+  - name: Health - docker
+    interval: 30s
+    script: "docker ps"
+    tags:
+      - docker
+  - name: Health - supervisor
+    interval: 30s
+    script: "supervisorctl status"
+    tags:
+      - supervisor
