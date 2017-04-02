@@ -12,4 +12,6 @@
     - { role: vault, tags: ['vault'] }
     - { role: consul, tags: ['consul'] }
     - { role: traefik, tags: ['traefik'] }
+    - { role: rabbitmq, tags: ['rabbitmq'] }
+    - { role: sensu, tags: ['sensu'] }
     - { role: supervisor, tags: ['supervisor'] }
