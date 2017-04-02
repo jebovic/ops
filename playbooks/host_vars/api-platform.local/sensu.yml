@@ -1,0 +1,30 @@
+---
+
+# Sensu services
+sensu_server_daemon_enabled: no
+sensu_client_daemon_enabled: yes
+sensu_api_daemon_enabled: no
+
+# Sensu basic configuration
+sensu_config:
+  client:
+    name: api-platform
+    address: 192.168.42.1
+    environment: development
+    subscriptions:
+      - dev
+      - debian
+  transport:
+    name: rabbitmq
+    reconnect_on_error: true
+  rabbitmq:
+    host: 192.168.42.1
+    port: 5672
+    vhost: "/sensu"
+    user: sensu
+    password: secret
+    heartbeat: 30
+    prefetch: 50
+
+# Uchiwa configuration
+sensu_uchiwa_enabled: no
