@@ -12,3 +12,4 @@ ufw_rules:
   - { port: 8500, rule: allow }  # Consul UI
   - { port: 8600, rule: allow, proto: any }  # DNS server
   - { port: 8600, direction: out, rule: allow, proto: any }    # DNS server
+  - { port: 2375, rule: allow }                             # Docker socket port

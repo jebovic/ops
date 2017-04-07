@@ -14,3 +14,4 @@
     - { role: sysdig, tags: ['base', 'sysdig'] }
     - { role: redis, tags: ['base', 'redis'] }
     - { role: mailhog, tags: ['base', 'mailhog'] }
+    - { role: sensu, tags: ['sensu'] }
