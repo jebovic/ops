@@ -68,16 +68,31 @@ sensu_config:
       interval: 10
       standalone: true
       handlers: ["influxdb_tcp"]
+    metric-docker-process:
+      type: metric
+      command: "/opt/sensu/embedded/bin/metrics-docker-container.rb -H tcp://127.0.0.1:2375 --scheme sensu.:::name:::.docker_process"
+      subscribers: [ "vagrant", "debian" ]
+      interval: 10
+      standalone: true
+      handlers: ["influxdb_tcp"]
+    metric-docker-stats:
+      type: metric
+      command: "/opt/sensu/embedded/bin/metrics-docker-stats.rb --scheme sensu.:::name:::.docker_stats"
+      subscribers: [ "vagrant", "debian" ]
+      interval: 10
+      standalone: true
+      handlers: ["influxdb_tcp"]
 
 sensu_plugins:
   - cpu-checks
-#  - disk-checks
+  - disk-checks
   - memory-checks
   - nginx
   - process-checks
   - load-checks
   - vmstats
   - docker
+  - uptime-checks
 
 # Uchiwa configuration
 sensu_uchiwa_enabled: no

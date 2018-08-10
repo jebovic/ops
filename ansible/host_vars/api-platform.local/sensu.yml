@@ -1,0 +1,86 @@
+---
+
+# Sensu basic configuration
+sensu_config:
+  client:
+    name: "{{ ansible_fqdn }}"
+    address: "{{ ansible_host }}"
+    environment: development
+    subscriptions:
+      - vagrant
+      - debian
+  transport:
+    name: rabbitmq
+    reconnect_on_error: true
+  rabbitmq:
+    host: 192.168.42.1
+    port: 5672
+    vhost: "/sensu"
+    user: sensu
+    password: secret
+    heartbeat: 30
+    prefetch: 50
+  checks:
+    metric-vmstat:
+      type: metric
+      command: "/opt/sensu/embedded/bin/metrics-vmstat.rb --scheme sensu.:::name:::"
+      subscribers: [ "vagrant", "debian" ]
+      interval: 10
+      standalone: true
+      handlers: ["influxdb_tcp"]
+    metric-load:
+      type: metric
+      command: "/opt/sensu/embedded/bin/metrics-load.rb --scheme sensu.:::name:::"
+      subscribers: [ "vagrant", "debian" ]
+      interval: 10
+      standalone: true
+      handlers: ["influxdb_tcp"]
+    metric-memory:
+      type: metric
+      command: "/opt/sensu/embedded/bin/metrics-memory.rb --scheme sensu.:::name:::.memory"
+      subscribers: [ "vagrant", "debian" ]
+      interval: 10
+      standalone: true
+      handlers: ["influxdb_tcp"]
+    metric-cpu:
+      type: metric
+      command: "/opt/sensu/embedded/bin/metrics-cpu-pcnt-usage.rb --scheme sensu.:::name:::.cpu"
+      subscribers: [ "vagrant", "debian" ]
+      interval: 10
+      standalone: true
+      handlers: ["influxdb_tcp"]
+    metric-processes-count:
+      type: metric
+      command: "/opt/sensu/embedded/bin/metrics-processes-threads-count.rb --scheme sensu.:::name:::"
+      subscribers: [ "vagrant", "debian" ]
+      interval: 10
+      standalone: true
+      handlers: ["influxdb_tcp"]
+    metric-user-usage:
+      type: metric
+      command: "/opt/sensu/embedded/bin/metrics-user-pct-usage.rb --scheme sensu.:::name:::.user_percent"
+      subscribers: [ "vagrant", "debian" ]
+      interval: 10
+      standalone: true
+      handlers: ["influxdb_tcp"]
+    metric-docker-process:
+      type: metric
+      command: "sudo /opt/sensu/embedded/bin/metrics-docker-container.rb --scheme sensu.:::name:::.docker_process"
+      subscribers: [ "vagrant", "debian" ]
+      interval: 10
+      standalone: true
+      handlers: ["influxdb_tcp"]
+    metric-docker-stats:
+      type: metric
+      command: "/opt/sensu/embedded/bin/metrics-docker-stats.rb --scheme sensu.:::name:::.docker_stats"
+      subscribers: [ "vagrant", "debian" ]
+      interval: 10
+      standalone: true
+      handlers: ["influxdb_tcp"]
+    metric-docker-swarm:
+      type: metric
+      command: "sudo /opt/sensu/embedded/bin/metrics-docker-swarm.sh"
+      subscribers: [ "vagrant", "debian" ]
+      interval: 10
+      standalone: true
+      handlers: ["influxdb_tcp"]

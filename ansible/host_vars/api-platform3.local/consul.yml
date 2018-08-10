@@ -21,6 +21,14 @@ consul_services:
     tags:
       - reverse proxy
       - supervisor
+  - name: nginx
+    check:
+      interval: 10s
+      script: "echo 'Ping nginx on {{ ansible_host }}:8000' && curl {{ ansible_host }}:8000 >/dev/null 2>&1 && (echo 'OK'; exit 0) || (echo 'KO';exit 1)"
+    port: 8000
+    tags:
+      - frontend
+      - web
   - name: consul
     check:
       interval: 10s

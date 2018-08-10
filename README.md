@@ -87,20 +87,20 @@ ansible-galaxy install -r monitoring.yml -p ../roles
 
 ### Run a playbook
 
-**Example #1**: run the base playbook on all servers listed in playbooks/inventory/local file
+**Example #1**: run the base playbook on all servers listed in ansible/_inventory file
 
 ```
-cd playbooks
-ansible-playbook -i inventories/local base.yml --ask-vault-pass
+cd ansible
+ansible-playbook base.yml --ask-vault-pass
 ```
 
-Note: don't forget to replace variables values from group_vars and host_vars, and replace encrypted values in playbooks/group_vars/all/vault.yml with yours.
+Note: don't forget to replace variables values from group_vars and host_vars, and replace encrypted values in ansible/group_vars/all/vault.yml with yours.
 
 **Example #2**: run the webservers playbook against VM listed into the webservers group of the inventory
 
 ```
-cd playbooks
-ansible-playbook -i inventories/local webservers.yml --limit webservers --ask-vault-pass
+cd ansible
+ansible-playbook nodes.yml --limit nodes
 ```
 
 License

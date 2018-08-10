@@ -9,7 +9,10 @@ ufw_rules:
   - { port: 8080, rule: allow }                             # Traefik UI
   - { port: 8300, rule: allow }                             # Consul cluster bind port
   - { port: 8301, rule: allow }                             # Consul cluster bind port
-  - { port: "{{ consul_http_port }}", rule: allow }         # Consul UI
+  - { port: 8500, rule: allow }                             # Consul UI
   - { port: 8600, rule: allow, proto: any }                 # DNS server
   - { port: 8600, direction: out, rule: allow, proto: any } # DNS server
   - { port: 2375, rule: allow }                             # Docker socket port
+  - { port: 2377, rule: allow }                             # Docker Swarm cluster management communications
+  - { port: 7946, rule: allow }                             # Docker Swarm communication among nodes
+  - { port: 4789, rule: allow }                             # Docker Swarm overlay network traffic
